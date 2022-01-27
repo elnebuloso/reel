@@ -1,13 +1,15 @@
-FROM alpine:3.12 as prod
+FROM php:8.1-alpine3.15 as prod
 
-ADD https://php.hernandev.com/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
+RUN apk add --update-cache bash bash-completion
 
-RUN apk --update-cache add ca-certificates && \
-    echo "https://php.hernandev.com/v3.12/php-8.0" >> /etc/apk/repositories
+RUN echo 'source /etc/profile' > /root/.bashrc \
+ && echo 'eval "$(/app/redo completion bash)"' >> /root/.bashrc \
+ && ln -s /app/redo /usr/local/bin/redo
 
-RUN apk add --update-cache \
-    php \
-    php-json
+COPY build/dist /app
+COPY VERSION /VERSION
+
+WORKDIR /app
 
 #
 # development layer for composer

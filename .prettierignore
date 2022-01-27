@@ -1,11 +1,11 @@
 # https://git-scm.com/docs/gitignore
 
 /*
+!/main
+/main/*
+!/main/src
+!/main/redo
 
 !.dockerignore
 !.gitignore
-!.gitlab-ci.yml
-!.prettierignore
-!build.xml
 !build.yml
-!docker-compose.yml
