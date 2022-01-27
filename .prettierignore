@@ -1,0 +1,11 @@
+# https://git-scm.com/docs/gitignore
+
+/*
+
+!.dockerignore
+!.gitignore
+!.gitlab-ci.yml
+!.prettierignore
+!build.xml
+!build.yml
+!docker-compose.yml

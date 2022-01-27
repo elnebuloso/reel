@@ -1,2 +1,9 @@
 /.git
 /.idea
+/.kube
+/.helm
+/.scannerwork
+
+/build/tmp
+/build/reports
+/main
