@@ -9,4 +9,5 @@ use Symfony\Component\Console\Command\Command;
 $app = new Application("redo", file_get_contents('/VERSION'));
 $app->add(new \App\Commands\Docker\BuildCommand());
 $app->add(new \App\Commands\Docker\PushCommand());
+$app->add(new \App\Commands\PropertiesCommand());
 $app->run();

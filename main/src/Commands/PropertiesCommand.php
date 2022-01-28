@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Commands\Docker;
+namespace App\Commands;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class PushCommand
+ * Class PropertiesCommand
  */
-class PushCommand extends Command
+class PropertiesCommand extends Command
 {
-    const NAME = "docker:push";
+    const NAME = "properties";
 
-    const DESCRIPTION = "Pushing Docker Container(s)";
+    const DESCRIPTION = "Show all evaluated and compiled available properties";
 
     /**
      * @return void
