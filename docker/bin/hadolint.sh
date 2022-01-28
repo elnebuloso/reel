@@ -6,4 +6,4 @@ set -e
 : "${REDO_HADOLINT_EXEC:=hadolint}"
 
 dockerception-pull "${REDO_HADOLINT}"
-dockerception-run "${REDO_HADOLINT} ${REDO_HADOLINT_EXEC}" "$@"
+dockerception-run /app "${REDO_HADOLINT} ${REDO_HADOLINT_EXEC}" "$@"
