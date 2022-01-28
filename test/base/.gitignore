@@ -1,2 +1,4 @@
+/.helm/
 /build.env.local
-/node_modules/
+/main/node_modules/
+/main/vendor/

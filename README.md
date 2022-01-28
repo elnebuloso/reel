@@ -14,8 +14,34 @@ CI/CD Abstraction Command Line Runner
 
 #### REDO_DOCKERCEPTION_PULL_POLICY
 
-- IfNotPresent
+- IfNotPresent 
 - Always
+
+## Dockerception
+
+### hadolint
+
+```shell
+./app.sh test base hadolint --version
+```
+
+### helm
+
+```shell
+./app.sh test base helm version
+```
+
+### npm
+
+```shell
+./app.sh test base npm --version
+```
+
+### yarn
+
+```shell
+./app.sh test base yarn --version
+```
 
 ## PHP Base Container Image
 
