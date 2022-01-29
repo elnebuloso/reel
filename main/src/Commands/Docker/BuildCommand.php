@@ -33,6 +33,8 @@ class BuildCommand extends Command
     {
         $output->writeln("<info>" . self::DESCRIPTION . "</info>");
 
+        passthru("docker build --rm --pull --file Dockerfile --target prod --tag redo-project-tmp .");
+
         return Command::SUCCESS;
     }
 }
