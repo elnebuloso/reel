@@ -8,6 +8,55 @@ CI/CD Abstraction Command Line Runner
 
 ## Usage
 
+### Requirements
+
+- Docker Installation
+
+### Installation
+
+Download and install the latest redo bash script for the current version
+
+#### Linux
+
+```shell
+curl -sSL https://raw.githubusercontent.com/elnebuloso/redo/main/redo.sh -o /usr/local/bin/redo \
+&& chmod +x /usr/local/bin/redo
+```
+
+### Run
+
+```shell
+redo list
+redo docker:build
+```
+
+#### Interactive mode with code completion
+
+If you want to keep redo open in interactive mode with code completion, run redo with **--watch** option.
+
+```shell
+redo --watch
+```
+
+### Configuration
+
+Redo can be completely configured via environment variables.
+
+To easily configure the environment variables during local development with REDO, simply place a build.env file in the root directory of the respective project and configure redo with the variables defined there.
+
+#### Environment Variables
+
+##### REDO_VERBOSE_LEVEL
+
+- **0** - no logging (Default)
+- **1** - info messages
+- **2** - debug messages
+
+##### REDO_DOCKERCEPTION_PULL_POLICY
+
+- IfNotPresent (Default)
+- Always
+
 ## Dockerception
 
 Provided Tools via Dockerception calls
@@ -166,33 +215,8 @@ Run redo commands and dockerception in test/base directory
 ./app.sh test base redo docker:build
 ```
 
+## MISC
 
-
-
-
-
-
-
-
-
-
-
-
-## Configuration
-
-### Environment Variables
-
-#### REDO_VERBOSE_LEVEL
-
-- **0** - no logging
-- **1** - info messages
-- **2** - debug messages
-
-#### REDO_DOCKERCEPTION_PULL_POLICY
-
-- IfNotPresent 
-- Always
-
-## PHP Base Container Image
+### Based on PHP Base Container Image
 
 https://github.com/codecasts/php-alpine
