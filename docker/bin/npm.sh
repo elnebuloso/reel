@@ -2,28 +2,33 @@
 
 set -e
 
-: "${REDO_NPM:=node:alpine}"
-: "${REDO_NPM_EXEC:=npm}"
+: "${REDO_NPM_IMG:=node:alpine}"
+: "${REDO_NPM_CMD:=npm}"
 : "${REDO_NPM_DIR:=main}"
 
-ARGUMENTS=""
+_ARGS_=()
 
 while [ $# -gt 0 ]; do
   case "$1" in
-    --REDO_NPM=*)
-      REDO_NPM="${1#*=}"
+    --REDO_NPM_IMG=*)
+      REDO_NPM_IMG="${1#*=}"
       ;;
-    --REDO_NPM_EXEC=*)
-      REDO_NPM_EXEC="${1#*=}"
+    --REDO_NPM_CMD=*)
+      REDO_NPM_CMD="${1#*=}"
       ;;
     --REDO_NPM_DIR=*)
       REDO_NPM_DIR="${1#*=}"
       ;;
     *)
-      ARGUMENTS="$ARGUMENTS $1"
+      _ARGS_+=($1)
   esac
   shift
 done
 
-dockerception-pull $REDO_NPM
-dockerception-run $REDO_NPM_DIR /app $REDO_NPM $REDO_NPM_EXEC $ARGUMENTS
+_ARGS_RUN_=()
+_ARGS_RUN_+=("$REDO_NPM_IMG")
+_ARGS_RUN_+=("$REDO_NPM_CMD")
+_ARGS_RUN_+=("${_ARGS_[*]}")
+
+dockerception-pull "$REDO_NPM_IMG"
+dockerception-run "$REDO_NPM_DIR" "/app" "${_ARGS_RUN_[*]}"
