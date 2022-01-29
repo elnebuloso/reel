@@ -4,10 +4,17 @@ set -e
 
 : "${REDO_VERBOSE_LEVEL:=0}"
 
-RUN="docker run -it --rm --volume $(pwd)/$1:$2 --workdir $2 ${@:3}"
+_RUN_=()
+_RUN_+=("docker")
+_RUN_+=("run")
+_RUN_+=("-it")
+_RUN_+=("--rm")
+_RUN_+=("--volume $(pwd)/$1:$2")
+_RUN_+=("--workdir $2")
+_RUN_+=("${@:3}")
 
 if [[ ${REDO_VERBOSE_LEVEL} -ge 2 ]]; then
-  echo -e "\e[36m${RUN}\e[0m"
+  echo -e "\e[36m${_RUN_[*]}\e[0m"
 fi
 
-$RUN
+${_RUN_[*]}

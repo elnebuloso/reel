@@ -7,7 +7,7 @@ set -e
 
 PULL_DOCKER_IMAGE="no"
 
-if [[ "$(docker images -q $1 2> /dev/null)" == "" ]]; then
+if [[ "$(docker images -q $1 2>/dev/null)" == "" ]]; then
   PULL_DOCKER_IMAGE="yes"
 fi
 
