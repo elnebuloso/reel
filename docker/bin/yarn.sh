@@ -2,28 +2,33 @@
 
 set -e
 
-: "${REDO_YARN:=node:alpine}"
-: "${REDO_YARN_EXEC:=yarn}"
+: "${REDO_YARN_IMG:=node:alpine}"
+: "${REDO_YARN_CMD:=yarn}"
 : "${REDO_YARN_DIR:=main}"
 
-ARGUMENTS=""
+_ARGS_=()
 
 while [ $# -gt 0 ]; do
   case "$1" in
-    --REDO_YARN=*)
-      REDO_YARN="${1#*=}"
+    --REDO_YARN_IMG=*)
+      REDO_YARN_IMG="${1#*=}"
       ;;
-    --REDO_YARN_EXEC=*)
-      REDO_YARN_EXEC="${1#*=}"
+    --REDO_YARN_CMD=*)
+      REDO_YARN_CMD="${1#*=}"
       ;;
     --REDO_YARN_DIR=*)
       REDO_YARN_DIR="${1#*=}"
       ;;
     *)
-      ARGUMENTS="$ARGUMENTS $1"
+      _ARGS_+=($1)
   esac
   shift
 done
 
-dockerception-pull $REDO_YARN
-dockerception-run $REDO_YARN_DIR /app $REDO_YARN $REDO_YARN_EXEC $ARGUMENTS
+_ARGS_RUN_=()
+_ARGS_RUN_+=("$REDO_YARN_IMG")
+_ARGS_RUN_+=("$REDO_YARN_CMD")
+_ARGS_RUN_+=("${_ARGS_[*]}")
+
+dockerception-pull "$REDO_YARN_IMG"
+dockerception-run "$REDO_YARN_DIR" "/app" "${_ARGS_RUN_[*]}"
