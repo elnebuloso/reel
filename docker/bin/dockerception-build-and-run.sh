@@ -38,7 +38,10 @@ while [ $# -gt 0 ]; do
   shift
 done
 
+_MD5_DOCKERFILE_=$(md5sum $REDO_DOCKERCEPTION_FILE_NAME | awk '{print $1}')
+
 _TAG_ARGS_=()
+_TAG_ARGS_+=("MD5_DOCKERFILE:$_MD5_DOCKERFILE_")
 _TAG_ARGS_+=("REDO_DOCKERCEPTION_BUILD_TAG:$REDO_DOCKERCEPTION_BUILD_TAG")
 _TAG_ARGS_+=("REDO_DOCKERCEPTION_BUILD_CONTEXT:$REDO_DOCKERCEPTION_BUILD_CONTEXT")
 _TAG_ARGS_+=("REDO_DOCKERCEPTION_FILE_NAME:$REDO_DOCKERCEPTION_FILE_NAME")
@@ -57,9 +60,12 @@ _BUILD_+=("--target $REDO_DOCKERCEPTION_FILE_TARGET")
 _BUILD_+=("--tag $_TAG_")
 _BUILD_+=("$REDO_DOCKERCEPTION_BUILD_CONTEXT")
 
-if [[ ${REDO_VERBOSE_LEVEL} -ge 2 ]]; then
-  echo -e "\e[36m${_BUILD_[*]}\e[0m"
+if [[ "$(docker images -q $_TAG_ 2>/dev/null)" == "" ]]; then
+  if [[ ${REDO_VERBOSE_LEVEL} -ge 2 ]]; then
+    echo -e "\e[36m${_BUILD_[*]}\e[0m"
+  fi
+
+  ${_BUILD_[*]}
 fi
 
-${_BUILD_[*]}
 dockerception-run $REDO_DOCKERCEPTION_RUN_DIR $REDO_DOCKERCEPTION_RUN_WORKDIR $_TAG_ ${_ARGS_[*]}
