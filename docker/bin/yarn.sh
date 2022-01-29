@@ -31,5 +31,5 @@ _ARGS_RUN_+=("$REDO_YARN_IMG")
 _ARGS_RUN_+=("$REDO_YARN_CMD")
 _ARGS_RUN_+=("${_ARGS_[*]}")
 
-dockerception-pull "$REDO_YARN_IMG"
-dockerception-run "$REDO_YARN_DIR" "/app" "${_ARGS_RUN_[*]}"
+dockerception-pull $REDO_YARN_IMG
+dockerception-run $REDO_YARN_DIR /app ${_ARGS_RUN_[*]}

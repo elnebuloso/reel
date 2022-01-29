@@ -31,5 +31,5 @@ _ARGS_RUN_+=("$REDO_HADOLINT_IMG")
 _ARGS_RUN_+=("$REDO_HADOLINT_CMD")
 _ARGS_RUN_+=("${_ARGS_[*]}")
 
-dockerception-pull "$REDO_HADOLINT_IMG"
-dockerception-run "$REDO_HADOLINT_DIR" "/app" "${_ARGS_RUN_[*]}"
+dockerception-pull $REDO_HADOLINT_IMG
+dockerception-run $REDO_HADOLINT_DIR /app ${_ARGS_RUN_[*]}

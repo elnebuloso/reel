@@ -33,5 +33,5 @@ _ARGS_RUN_+=("$REDO_HELM_IMG")
 _ARGS_RUN_+=("$REDO_HELM_CMD")
 _ARGS_RUN_+=("${_ARGS_[*]}")
 
-dockerception-pull "$REDO_HELM_IMG"
-dockerception-run "$REDO_HELM_DIR" "/app" "${_ARGS_RUN_[*]}"
+dockerception-pull $REDO_HELM_IMG
+dockerception-run $REDO_HELM_DIR /app ${_ARGS_RUN_[*]}

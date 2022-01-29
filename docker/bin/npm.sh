@@ -31,5 +31,5 @@ _ARGS_RUN_+=("$REDO_NPM_IMG")
 _ARGS_RUN_+=("$REDO_NPM_CMD")
 _ARGS_RUN_+=("${_ARGS_[*]}")
 
-dockerception-pull "$REDO_NPM_IMG"
-dockerception-run "$REDO_NPM_DIR" "/app" "${_ARGS_RUN_[*]}"
+dockerception-pull $REDO_NPM_IMG
+dockerception-run $REDO_NPM_DIR /app ${_ARGS_RUN_[*]}
