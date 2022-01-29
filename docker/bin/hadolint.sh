@@ -2,28 +2,33 @@
 
 set -e
 
-: "${REDO_HADOLINT:=hadolint/hadolint:latest}"
-: "${REDO_HADOLINT_EXEC:=hadolint}"
+: "${REDO_HADOLINT_IMG:=hadolint/hadolint:latest}"
+: "${REDO_HADOLINT_CMD:=hadolint}"
 : "${REDO_HADOLINT_DIR:=.}"
 
-ARGUMENTS=""
+_ARGS_=()
 
 while [ $# -gt 0 ]; do
   case "$1" in
-    --REDO_HADOLINT=*)
-      REDO_HADOLINT="${1#*=}"
+    --REDO_HADOLINT_IMG=*)
+      REDO_HADOLINT_IMG="${1#*=}"
       ;;
-    --REDO_HADOLINT_EXEC=*)
-      REDO_HADOLINT_EXEC="${1#*=}"
+    --REDO_HADOLINT_CMD=*)
+      REDO_HADOLINT_CMD="${1#*=}"
       ;;
     --REDO_HADOLINT_DIR=*)
       REDO_HADOLINT_DIR="${1#*=}"
       ;;
     *)
-      ARGUMENTS="$ARGUMENTS $1"
+      _ARGS_+=($1)
   esac
   shift
 done
 
-dockerception-pull $REDO_HADOLINT
-dockerception-run $REDO_HADOLINT_DIR /app $REDO_HADOLINT $REDO_HADOLINT_EXEC $ARGUMENTS
+_ARGS_RUN_=()
+_ARGS_RUN_+=("$REDO_HADOLINT_IMG")
+_ARGS_RUN_+=("$REDO_HADOLINT_CMD")
+_ARGS_RUN_+=("${_ARGS_[*]}")
+
+dockerception-pull "$REDO_HADOLINT_IMG"
+dockerception-run "$REDO_HADOLINT_DIR" "/app" "${_ARGS_RUN_[*]}"
