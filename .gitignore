@@ -1,10 +1,9 @@
 /.idea
 /.kube
 /.helm
-/.scannerwork
 
 /build
-/build.local.env
-/build.local.yml
+/build.env
+/build.env.local
 
 /main/vendor

@@ -1,4 +1,10 @@
-/.helm/
+/.idea
+/.kube
+/.helm
+
+/build
+/build.env
 /build.env.local
+
 /main/node_modules/
 /main/vendor/
