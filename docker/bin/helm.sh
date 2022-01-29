@@ -10,17 +10,18 @@ _ARGS_=()
 
 while [ $# -gt 0 ]; do
   case "$1" in
-    --REDO_HELM_IMG=*)
-      REDO_HELM_IMG="${1#*=}"
-      ;;
-    --REDO_HELM_CMD=*)
-      REDO_HELM_CMD="${1#*=}"
-      ;;
-    --REDO_HELM_DIR=*)
-      REDO_HELM_DIR="${1#*=}"
-      ;;
-    *)
-      _ARGS_+=($1)
+  --REDO_HELM_IMG=*)
+    REDO_HELM_IMG="${1#*=}"
+    ;;
+  --REDO_HELM_CMD=*)
+    REDO_HELM_CMD="${1#*=}"
+    ;;
+  --REDO_HELM_DIR=*)
+    REDO_HELM_DIR="${1#*=}"
+    ;;
+  *)
+    _ARGS_+=($1)
+    ;;
   esac
   shift
 done

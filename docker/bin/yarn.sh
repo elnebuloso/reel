@@ -10,17 +10,18 @@ _ARGS_=()
 
 while [ $# -gt 0 ]; do
   case "$1" in
-    --REDO_YARN_IMG=*)
-      REDO_YARN_IMG="${1#*=}"
-      ;;
-    --REDO_YARN_CMD=*)
-      REDO_YARN_CMD="${1#*=}"
-      ;;
-    --REDO_YARN_DIR=*)
-      REDO_YARN_DIR="${1#*=}"
-      ;;
-    *)
-      _ARGS_+=($1)
+  --REDO_YARN_IMG=*)
+    REDO_YARN_IMG="${1#*=}"
+    ;;
+  --REDO_YARN_CMD=*)
+    REDO_YARN_CMD="${1#*=}"
+    ;;
+  --REDO_YARN_DIR=*)
+    REDO_YARN_DIR="${1#*=}"
+    ;;
+  *)
+    _ARGS_+=($1)
+    ;;
   esac
   shift
 done

@@ -10,17 +10,18 @@ _ARGS_=()
 
 while [ $# -gt 0 ]; do
   case "$1" in
-    --REDO_HADOLINT_IMG=*)
-      REDO_HADOLINT_IMG="${1#*=}"
-      ;;
-    --REDO_HADOLINT_CMD=*)
-      REDO_HADOLINT_CMD="${1#*=}"
-      ;;
-    --REDO_HADOLINT_DIR=*)
-      REDO_HADOLINT_DIR="${1#*=}"
-      ;;
-    *)
-      _ARGS_+=($1)
+  --REDO_HADOLINT_IMG=*)
+    REDO_HADOLINT_IMG="${1#*=}"
+    ;;
+  --REDO_HADOLINT_CMD=*)
+    REDO_HADOLINT_CMD="${1#*=}"
+    ;;
+  --REDO_HADOLINT_DIR=*)
+    REDO_HADOLINT_DIR="${1#*=}"
+    ;;
+  *)
+    _ARGS_+=($1)
+    ;;
   esac
   shift
 done

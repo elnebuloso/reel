@@ -10,17 +10,18 @@ _ARGS_=()
 
 while [ $# -gt 0 ]; do
   case "$1" in
-    --REDO_NPM_IMG=*)
-      REDO_NPM_IMG="${1#*=}"
-      ;;
-    --REDO_NPM_CMD=*)
-      REDO_NPM_CMD="${1#*=}"
-      ;;
-    --REDO_NPM_DIR=*)
-      REDO_NPM_DIR="${1#*=}"
-      ;;
-    *)
-      _ARGS_+=($1)
+  --REDO_NPM_IMG=*)
+    REDO_NPM_IMG="${1#*=}"
+    ;;
+  --REDO_NPM_CMD=*)
+    REDO_NPM_CMD="${1#*=}"
+    ;;
+  --REDO_NPM_DIR=*)
+    REDO_NPM_DIR="${1#*=}"
+    ;;
+  *)
+    _ARGS_+=($1)
+    ;;
   esac
   shift
 done
