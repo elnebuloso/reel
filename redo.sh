@@ -4,7 +4,7 @@ DEV="no"
 DEV_IMAGE="redo-dev"
 IMAGE="elnebuloso/redo:0"
 SKIP_PULL="no"
-WATCH="no"
+SHELL="no"
 
 _ARGS_=()
 
@@ -19,8 +19,8 @@ while [ $# -gt 0 ]; do
   --skip-pull)
     SKIP_PULL="yes"
     ;;
-  --watch)
-    WATCH="yes"
+  --shell)
+    SHELL="yes"
     ;;
   *)
     _ARGS_+=($1)
@@ -57,7 +57,7 @@ fi
 
 _ARGS_RUN_+=($IMAGE)
 
-if [[ "$WATCH" = "yes" ]]; then
+if [[ "$SHELL" = "yes" ]]; then
   _ARGS_RUN_+=("bash")
 else
   _ARGS_RUN_+=("redo")

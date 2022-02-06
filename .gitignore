@@ -4,5 +4,8 @@
 /.redo.env.local
 
 /build
+/backup
+
 /main/vendor
-/backup/
+/main/tests/.phpunit.result.cache
+/phpunit-9.5.10.phar

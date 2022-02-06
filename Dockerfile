@@ -33,3 +33,17 @@ WORKDIR /app
 FROM prod as dev-composer
 ADD https://getcomposer.org/composer-2.phar /usr/local/bin/composer
 RUN chmod 777 /usr/local/bin/composer
+
+#
+# development layer for phpunit
+#
+FROM prod as dev-phpunit
+
+RUN apk add --no-cache pcre-dev ${PHPIZE_DEPS} \
+ && pecl install xdebug \
+ && docker-php-ext-enable xdebug \
+ && apk del pcre-dev ${PHPIZE_DEPS}
+
+ENV XDEBUG_MODE coverage
+ADD https://phar.phpunit.de/phpunit-9.phar /usr/local/bin/phpunit
+RUN chmod 777 /usr/local/bin/phpunit

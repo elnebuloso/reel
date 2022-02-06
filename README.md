@@ -35,7 +35,7 @@ redo docker:build
 If you want to keep redo open in interactive mode with code completion, run redo with **--watch** option.
 
 ```shell
-redo --watch
+redo --shell
 ```
 
 ### Configuration
