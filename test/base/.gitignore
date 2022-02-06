@@ -1,9 +1,7 @@
 /.idea
 /.redo
-
-/build
-/build.env
-/build.env.local
+/.redo.env
+/.redo.env.local
 
 /main/node_modules/
 /main/vendor/

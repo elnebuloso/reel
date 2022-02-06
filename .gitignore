@@ -1,9 +1,8 @@
 /.idea
 /.redo
+/.redo.env
+/.redo.env.local
 
 /build
-/build.env
-/build.env.local
-
 /main/vendor
 /backup/

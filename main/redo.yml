@@ -1,0 +1,4 @@
+redo:
+  properties:
+    project_name: "{{ project_root|basename }}"
+    project_name_slug: "{{ project_name|slugify }}"

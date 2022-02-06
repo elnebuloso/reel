@@ -42,7 +42,7 @@ redo --watch
 
 Redo can be completely configured via environment variables.
 
-To easily configure the environment variables during local development with REDO, simply place a build.env file in the root directory of the respective project and configure redo with the variables defined there.
+To easily configure the environment variables during local development with REDO, simply place a .redo.env file in the root directory of the respective project and configure redo with the variables defined there.
 
 #### Environment Variables
 
