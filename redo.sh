@@ -47,12 +47,12 @@ _ARGS_RUN_+=("--volume /var/run/docker.sock:/var/run/docker.sock")
 _ARGS_RUN_+=("--volume $(pwd):$(pwd)")
 _ARGS_RUN_+=("--workdir $(pwd)")
 
-if [[ -f "$(pwd)/build.env" ]]; then
-  _ARGS_RUN_+=("--env-file $(pwd)/build.env")
+if [[ -f "$(pwd)/.redo.env" ]]; then
+  _ARGS_RUN_+=("--env-file $(pwd)/.redo.env")
 fi
 
-if [[ -f "$(pwd)/build.env.local" ]]; then
-  _ARGS_RUN_+=("--env-file $(pwd)/build.env.local")
+if [[ -f "$(pwd)/.redo.env.local" ]]; then
+  _ARGS_RUN_+=("--env-file $(pwd)/.redo.env.local")
 fi
 
 _ARGS_RUN_+=($IMAGE)

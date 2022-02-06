@@ -56,12 +56,12 @@ case $1 in
   _ARGS_RUN_+=("--volume $(pwd)/main:/redo --volume $(pwd)/VERSION:/VERSION")
   _ARGS_RUN_+=("--volume $(pwd)/test/$2:$(pwd)/test/$2 --workdir $(pwd)/test/$2")
 
-  if [[ -f "$(pwd)/test/$2/build.env" ]]; then
-    _ARGS_RUN_+=("--env-file $(pwd)/test/$2/build.env")
+  if [[ -f "$(pwd)/test/$2/.redo.env" ]]; then
+    _ARGS_RUN_+=("--env-file $(pwd)/test/$2/.redo.env")
   fi
 
-  if [[ -f "$(pwd)/test/$2/build.env.local" ]]; then
-    _ARGS_RUN_+=("--env-file $(pwd)/test/$2/build.env.local")
+  if [[ -f "$(pwd)/test/$2/.redo.env.local" ]]; then
+    _ARGS_RUN_+=("--env-file $(pwd)/test/$2/.redo.env.local")
   fi
 
   _ARGS_RUN_+=("${DEV_IMAGE}")
