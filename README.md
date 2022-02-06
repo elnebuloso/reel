@@ -207,26 +207,26 @@ Usage
 
 Prepare redo application for local development
 
-```shell
+```Shell
 ./app.sh prepare
 ```
 
 Build redo application container for local development
 
-```shell
+```Shell
 ./app.sh build
 ```
 
 Install or Update Dependencies, requires building the redo application container
 
-```shell
+```Shell
 ./app.sh install
 ./app.sh update
 ```
 
 Run Tests, requires building the redo application container
 
-```shell
+```Shell
 ./app.sh tests
 ```
 
@@ -243,13 +243,13 @@ Run Tests, requires building the redo application container
 
 Run redo in an interactive bash in test/base directory, also supporting bash completion
 
-```shell
+```Shell
 ./app.sh test base bash
 ```
 
 Run redo commands and dockerception in test/base directory
 
-```shell
+```Shell
 ./app.sh test base redo docker:build
 ```
 
