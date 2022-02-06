@@ -21,24 +21,55 @@ case $1 in
   docker build --rm --pull --tag ${DEV_IMAGE} --target prod --file Dockerfile .
   ;;
 
+"install")
+  _ARGS_RUN_=()
+  _ARGS_RUN_+=("--tty")
+  _ARGS_RUN_+=("--interactive")
+  _ARGS_RUN_+=("--rm")
+  _ARGS_RUN_+=("--volume /var/run/docker.sock:/var/run/docker.sock")
+  _ARGS_RUN_+=("--volume $(pwd):$(pwd)")
+  _ARGS_RUN_+=("--workdir $(pwd)")
+  _ARGS_RUN_+=("${DEV_IMAGE}")
+
+  docker run ${_ARGS_RUN_[*]} composer install
+  ;;
+
+"update")
+  _ARGS_RUN_=()
+  _ARGS_RUN_+=("--tty")
+  _ARGS_RUN_+=("--interactive")
+  _ARGS_RUN_+=("--rm")
+  _ARGS_RUN_+=("--volume /var/run/docker.sock:/var/run/docker.sock")
+  _ARGS_RUN_+=("--volume $(pwd):$(pwd)")
+  _ARGS_RUN_+=("--workdir $(pwd)")
+  _ARGS_RUN_+=("${DEV_IMAGE}")
+
+  docker run ${_ARGS_RUN_[*]} composer update
+  ;;
+
 "test")
-  args=""
-  args="$args --volume $(pwd)/main:/redo --volume $(pwd)/VERSION:/VERSION"
-  args="$args --volume $(pwd)/test/$2:$(pwd)/test/$2 --workdir $(pwd)/test/$2"
-  args="$args --volume /var/run/docker.sock:/var/run/docker.sock"
+  _ARGS_RUN_=()
+  _ARGS_RUN_+=("--tty")
+  _ARGS_RUN_+=("--interactive")
+  _ARGS_RUN_+=("--rm")
+  _ARGS_RUN_+=("--volume /var/run/docker.sock:/var/run/docker.sock")
+  _ARGS_RUN_+=("--volume $(pwd)/main:/redo --volume $(pwd)/VERSION:/VERSION")
+  _ARGS_RUN_+=("--volume $(pwd)/test/$2:$(pwd)/test/$2 --workdir $(pwd)/test/$2")
 
   if [[ -f "$(pwd)/test/$2/build.env" ]]; then
-    args="$args --env-file $(pwd)/test/$2/build.env"
+    _ARGS_RUN_+=("--env-file $(pwd)/test/$2/build.env")
   fi
 
   if [[ -f "$(pwd)/test/$2/build.env.local" ]]; then
-    args="$args --env-file $(pwd)/test/$2/build.env.local"
+    _ARGS_RUN_+=("--env-file $(pwd)/test/$2/build.env.local")
   fi
 
+  _ARGS_RUN_+=("${DEV_IMAGE}")
+
   if [[ -z "${@:3}" ]]; then
-    docker run --tty --interactive --rm ${args} ${DEV_IMAGE} bash
+    docker run ${_ARGS_RUN_[*]} bash
   else
-    docker run --tty --interactive --rm ${args} ${DEV_IMAGE} "${@:3}"
+    docker run ${_ARGS_RUN_[*]} "${@:3}"
   fi
   ;;
 
