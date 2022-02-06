@@ -4,6 +4,8 @@ FROM php:8.1-alpine3.15 as prod
 # It allows users to install packages with an index that is updated and used on-the-fly and not cached locally.
 # This avoids the need to use --update-cache and remove /var/cache/apk/* when done installing packages.
 RUN apk add --no-cache \
+    curl \
+    ca-certificates \
     bash \
     bash-completion \
     docker \
