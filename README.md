@@ -197,7 +197,7 @@ REDO_YARN_DIR=main
 
 Usage
 
-```shell
+```sh
 # redo development
 ./app.sh test base yarn --version
 ./app.sh test base yarn --version --REDO_YARN_IMG=node:12
@@ -207,26 +207,26 @@ Usage
 
 Prepare redo application for local development
 
-```Shell
+```sh
 ./app.sh prepare
 ```
 
 Build redo application container for local development
 
-```Shell
+```sh
 ./app.sh build
 ```
 
 Install or Update Dependencies, requires building the redo application container
 
-```Shell
+```sh
 ./app.sh install
 ./app.sh update
 ```
 
 Run Tests, requires building the redo application container
 
-```Shell
+```sh
 ./app.sh tests
 ```
 
@@ -243,13 +243,13 @@ Run Tests, requires building the redo application container
 
 Run redo in an interactive bash in test/base directory, also supporting bash completion
 
-```Shell
+```sh
 ./app.sh test base bash
 ```
 
 Run redo commands and dockerception in test/base directory
 
-```Shell
+```sh
 ./app.sh test base redo docker:build
 ```
 
