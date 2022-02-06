@@ -8,7 +8,7 @@ CI/CD Abstraction Command Line Runner
 
 1. [Features](#features)
 2. [Usage](#usage)
-3. [Development / Contribute](#development)
+3. [Development / Contribute](#development--contribute)
 
 ## Features
 
