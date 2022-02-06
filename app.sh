@@ -1,6 +1,28 @@
 #!/bin/bash
 
-DEV_IMAGE="redo-dev"
+_DEV_IMAGE_="redo-dev"
+
+_ARGS_BUILD_=()
+_ARGS_BUILD_+=("--rm")
+_ARGS_BUILD_+=("--pull")
+_ARGS_BUILD_+=("--target prod")
+_ARGS_BUILD_+=("--file Dockerfile")
+
+_ARGS_RUN_=()
+_ARGS_RUN_+=("--tty")
+_ARGS_RUN_+=("--interactive")
+_ARGS_RUN_+=("--rm")
+_ARGS_RUN_+=("--volume /var/run/docker.sock:/var/run/docker.sock")
+_ARGS_RUN_+=("--volume $(pwd):$(pwd)")
+_ARGS_RUN_+=("--workdir $(pwd)")
+
+if [[ -f "$(pwd)/.redo.env" ]]; then
+  _ARGS_RUN_+=("--env-file $(pwd)/.redo.env")
+fi
+
+if [[ -f "$(pwd)/.redo.env.local" ]]; then
+  _ARGS_RUN_+=("--env-file $(pwd)/.redo.env.local")
+fi
 
 case $1 in
 "prepare")
@@ -18,36 +40,34 @@ case $1 in
   ;;
 
 "build")
-  docker build --rm --pull --tag ${DEV_IMAGE} --target prod --file Dockerfile .
+  docker build ${_ARGS_BUILD_[*]} --tag ${_DEV_IMAGE_} .
   ;;
 
 "install")
-  _ARGS_RUN_=()
-  _ARGS_RUN_+=("--tty")
-  _ARGS_RUN_+=("--interactive")
-  _ARGS_RUN_+=("--rm")
-  _ARGS_RUN_+=("--volume /var/run/docker.sock:/var/run/docker.sock")
-  _ARGS_RUN_+=("--volume $(pwd):$(pwd)")
-  _ARGS_RUN_+=("--workdir $(pwd)")
-  _ARGS_RUN_+=("${DEV_IMAGE}")
-
-  docker run ${_ARGS_RUN_[*]} composer install
+  _ARGS_=()
+  _ARGS_+=("composer")
+  _ARGS_+=("install")
+  docker run ${_ARGS_RUN_[*]} ${_DEV_IMAGE_} ${_ARGS_[*]}
   ;;
 
 "update")
-  _ARGS_RUN_=()
-  _ARGS_RUN_+=("--tty")
-  _ARGS_RUN_+=("--interactive")
-  _ARGS_RUN_+=("--rm")
-  _ARGS_RUN_+=("--volume /var/run/docker.sock:/var/run/docker.sock")
-  _ARGS_RUN_+=("--volume $(pwd):$(pwd)")
-  _ARGS_RUN_+=("--workdir $(pwd)")
-  _ARGS_RUN_+=("${DEV_IMAGE}")
-
-  docker run ${_ARGS_RUN_[*]} composer update
+  _ARGS_=()
+  _ARGS_+=("composer")
+  _ARGS_+=("update")
+  docker run ${_ARGS_RUN_[*]} ${_DEV_IMAGE_} ${_ARGS_[*]}
   ;;
 
-"test")
+"tests")
+  _ARGS_=()
+  _ARGS_+=("phpunit")
+  _ARGS_+=("--configuration ./main/tests/phpunit.xml")
+  _ARGS_+=("--bootstrap ./main/tests/bootstrap.php")
+  _ARGS_+=("--coverage-html ./.redo/reports/phpunit/all/coverage/html")
+  _ARGS_+=("--testsuite all")
+  docker run ${_ARGS_RUN_[*]} ${_DEV_IMAGE_} ${_ARGS_[*]}
+  ;;
+
+"demo")
   _ARGS_RUN_=()
   _ARGS_RUN_+=("--tty")
   _ARGS_RUN_+=("--interactive")
@@ -64,7 +84,7 @@ case $1 in
     _ARGS_RUN_+=("--env-file $(pwd)/test/$2/.redo.env.local")
   fi
 
-  _ARGS_RUN_+=("${DEV_IMAGE}")
+  _ARGS_RUN_+=("${_DEV_IMAGE_}")
 
   if [[ -z "${@:3}" ]]; then
     docker run ${_ARGS_RUN_[*]} bash

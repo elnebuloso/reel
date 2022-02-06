@@ -1,10 +1,6 @@
 /.idea
 /.redo
-/.redo.env
 /.redo.env.local
-
-/build
-/backup
 
 /main/vendor
 /main/tests/.phpunit.result.cache

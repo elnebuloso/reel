@@ -22,8 +22,8 @@ RUN find /usr/local/bin -type f -name '*.sh' | while read f; do mv "$f" "${f%.sh
  && echo "alias redo='/redo/redo'" >> /root/.bashrc \
  && ln -s /redo/redo /usr/local/bin/redo
 
-ENV REDO_DOCKERCEPTION_PULL_POLICY IfNotPresent
 ENV REDO_VERBOSE_LEVEL 0
+ENV REDO_DOCKERCEPTION_PULL_POLICY IfNotPresent
 
 WORKDIR /app
 

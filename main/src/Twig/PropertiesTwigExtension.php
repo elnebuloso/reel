@@ -90,6 +90,15 @@ class PropertiesTwigExtension extends AbstractExtension
      */
     public function env(string $variable): string
     {
-        return (string) getenv($variable);
+        return (string)getenv($variable);
+    }
+
+    /**
+     * @param string $filename
+     * @return string
+     */
+    public function file(string $filename): string
+    {
+        return trim(file_get_contents($filename));
     }
 }

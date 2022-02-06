@@ -2,6 +2,14 @@
 
 CI/CD Abstraction Command Line Runner
 
+## Currently, under heavy development
+
+## Table of contents
+
+1. [Features](#features)
+2. [Usage](#usage)
+3. [Development / Contribute](#development)
+
 ## Features
 
 - Dockerception
@@ -195,13 +203,43 @@ Usage
 ./app.sh test base yarn --version --REDO_YARN_IMG=node:12
 ```
 
-## Development
+## Development / Contribute
 
-Build redo container for local development
+Prepare redo application for local development
+
+```shell
+./app.sh prepare
+```
+
+Build redo application container for local development
 
 ```shell
 ./app.sh build
 ```
+
+Install or Update Dependencies, requires building the redo application container
+
+```shell
+./app.sh install
+./app.sh update
+```
+
+Run Tests, requires building the redo application container
+
+```shell
+./app.sh tests
+```
+
+
+
+
+
+
+
+
+
+
+
 
 Run redo in an interactive bash in test/base directory, also supporting bash completion
 
