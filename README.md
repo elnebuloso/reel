@@ -207,54 +207,37 @@ Usage
 
 Prepare redo application for local development
 
-```bash
+```shell
 ./app.sh prepare
 ```
 
 Build redo application container for local development
 
-```bash
+```shell
 ./app.sh build
 ```
 
 Install or Update Dependencies, requires building the redo application container
 
-```bash
+```shell
 ./app.sh install
 ./app.sh update
 ```
 
 Run Tests, requires building the redo application container
 
-```bash
+```shell
 ./app.sh tests
 ```
 
-
-
-
-
-
-
-
-
-
-
-
 Run redo in an interactive bash in test/base directory, also supporting bash completion
 
-```bash
-./app.sh test base bash
+```shell
+./app.sh demo base bash
 ```
 
 Run redo commands and dockerception in test/base directory
 
-```bash
-./app.sh test base redo docker:build
+```shell
+./app.sh demo base redo docker:build
 ```
-
-## MISC
-
-### Based on PHP Base Container Image
-
-https://github.com/codecasts/php-alpine
