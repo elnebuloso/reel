@@ -27,8 +27,8 @@ while [ $# -gt 0 ]; do
 done
 
 _ARGS_RUN_=()
-_ARGS_RUN_+=("--volume $(pwd)/$REDO_HELM_DIR/.helm/cache:/root/.cache/helm")
-_ARGS_RUN_+=("--volume $(pwd)/$REDO_HELM_DIR/.helm/config:/root/.config/helm")
+_ARGS_RUN_+=("--volume $(pwd)/$REDO_HELM_DIR/.redo/.helm/cache:/root/.cache/helm")
+_ARGS_RUN_+=("--volume $(pwd)/$REDO_HELM_DIR/.redo/.helm/config:/root/.config/helm")
 _ARGS_RUN_+=("$REDO_HELM_IMG")
 _ARGS_RUN_+=("$REDO_HELM_CMD")
 _ARGS_RUN_+=("${_ARGS_[*]}")

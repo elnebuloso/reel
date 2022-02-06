@@ -1,6 +1,5 @@
 /.idea
-/.kube
-/.helm
+/.redo
 
 /build
 /build.env
