@@ -34,6 +34,7 @@ class PropertiesTwigExtensionTestCase extends TestCase
 
     /**
      * @test
+     * @return void
      */
     public function testMD5(): void
     {
@@ -43,6 +44,7 @@ class PropertiesTwigExtensionTestCase extends TestCase
 
     /**
      * @test
+     * @return void
      */
     public function testSHA1(): void
     {
@@ -52,6 +54,7 @@ class PropertiesTwigExtensionTestCase extends TestCase
 
     /**
      * @test
+     * @return void
      */
     public function testSlugify(): void
     {
@@ -64,6 +67,7 @@ class PropertiesTwigExtensionTestCase extends TestCase
 
     /**
      * @test
+     * @return void
      */
     public function testBasename(): void
     {
@@ -74,6 +78,7 @@ class PropertiesTwigExtensionTestCase extends TestCase
 
     /**
      * @test
+     * @return void
      */
     public function testTruncate(): void
     {
@@ -115,6 +120,7 @@ class PropertiesTwigExtensionTestCase extends TestCase
 
     /**
      * @test
+     * @return void
      */
     public function testEnv(): void
     {
@@ -124,6 +130,7 @@ class PropertiesTwigExtensionTestCase extends TestCase
 
     /**
      * @test
+     * @return void
      */
     public function testFile(): void
     {
