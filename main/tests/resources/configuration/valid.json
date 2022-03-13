@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "properties": {
+    "project_name": "foo",
+    "project_folder": "main"
+  }
+}
