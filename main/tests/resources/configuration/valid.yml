@@ -1,4 +1,15 @@
 version: 1
+
 properties:
   project_name: foo
   project_folder: main
+
+branches:
+  foo:
+    regex: ^main$
+    properties:
+      project_name: bar
+    docker_pushes:
+      - foo
+      - bar
+      - baz
