@@ -3,15 +3,34 @@
 namespace App;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\Config\Definition\Builder\NodeBuilder;
+use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class Configuration
  */
 class Configuration implements ConfigurationInterface
 {
+    /**
+     * @var ConfigurationPropertyCollection
+     */
+    private ConfigurationPropertyCollection $properties;
+
+    /**
+     * construct
+     */
+    public function __construct()
+    {
+        $configuration = Yaml::parseFile(__DIR__ . "/Configuration.yml");
+
+        $this->properties = new ConfigurationPropertyCollection();
+        $this->buildProperties($configuration["properties"]);
+    }
+
     /**
      * @return TreeBuilder
      */
@@ -20,9 +39,8 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder("redo");
 
         $rootNode = $treeBuilder->getRootNode();
-        $rootNode->append($this->createVersionConfig());
-        $rootNode->append($this->createPropertiesConfig());
-        $rootNode->append($this->createBranchesConfig());
+        $rootNode->append($this->createVersionNode());
+        $rootNode->append($this->createPropertiesNode());
 
         return $treeBuilder;
     }
@@ -30,7 +48,7 @@ class Configuration implements ConfigurationInterface
     /**
      * @return ScalarNodeDefinition
      */
-    private function createVersionConfig(): ScalarNodeDefinition
+    private function createVersionNode(): ScalarNodeDefinition
     {
         $version = new ScalarNodeDefinition("version");
         $version->isRequired();
@@ -42,53 +60,61 @@ class Configuration implements ConfigurationInterface
     /**
      * @return ArrayNodeDefinition
      */
-    private function createPropertiesConfig(): ArrayNodeDefinition
+    private function createPropertiesNode(): ArrayNodeDefinition
     {
         $properties = new ArrayNodeDefinition("properties");
-        $properties->useAttributeAsKey("name");
-        $properties->prototype("scalar");
+
+        foreach ($this->properties as $property) {
+            $this->createPropertyNode($property, $properties);
+        }
 
         return $properties;
     }
 
     /**
-     * @return ArrayNodeDefinition
+     * @param ConfigurationProperty $property
+     * @param ArrayNodeDefinition $parentNode
+     * @return void
      */
-    private function createBranchesConfig(): ArrayNodeDefinition
+    private function createPropertyNode(ConfigurationProperty $property, ArrayNodeDefinition $parentNode): void
     {
-        $branches = new ArrayNodeDefinition("branches");
-        $branches->useAttributeAsKey("name");
+        if ($property->getType() === ConfigurationProperty::TYPE_ARRAY) {
+            $node = new ArrayNodeDefinition($property->getName());
 
-        $branch = $branches->arrayPrototype();
-        $branch = $branch->children();
+            foreach ($property->getProperties() as $child) {
+                $this->createPropertyNode($child, $node);
+            }
 
-        $branch->append($this->createRegexConfig());
-        $branch->append($this->createPropertiesConfig());
-        $branch->append($this->createDockerPushesConfig());
+            if (empty($property->getProperties())) {
+                $node->prototype("scalar");
+            }
+        } else {
+            $node = new ScalarNodeDefinition($property->getName());
+        }
 
-        return $branches;
+        $parentNode->children()->append($node);
     }
 
     /**
-     * @return ScalarNodeDefinition
+     * @param array $configuration
+     * @param ConfigurationProperty|null $parent
+     * @return void
      */
-    private function createRegexConfig(): ScalarNodeDefinition
+    private function buildProperties(array $configuration, ?ConfigurationProperty $parent = null): void
     {
-        $regex = new ScalarNodeDefinition("regex");
-        $regex->isRequired();
-        $regex->cannotBeEmpty();
+        foreach ($configuration as $name => $data) {
+            $property = new ConfigurationProperty($name, $parent);
+            $property->setType($data["type"]);
 
-        return $regex;
-    }
+            if (array_key_exists("properties", $data) && is_array($data["properties"])) {
+                $this->buildProperties($data["properties"], $property);
+            }
 
-    /**
-     * @return ArrayNodeDefinition
-     */
-    private function createDockerPushesConfig(): ArrayNodeDefinition
-    {
-        $dockerPushes = new ArrayNodeDefinition("docker_pushes");
-        $dockerPushes->scalarPrototype();
-
-        return $dockerPushes;
+            if ($parent !== null) {
+                $parent->addProperty($property);
+            } else {
+                $this->properties->addProperty($property);
+            }
+        }
     }
 }

@@ -4,6 +4,7 @@
   "license": "MIT",
   "type": "project",
   "require": {
+    "php": "^8.1",
     "ext-json": "*",
     "jasny/dotkey": "^2.1.0",
     "cocur/slugify": "^4.1.0",

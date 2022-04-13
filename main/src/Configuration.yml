@@ -1,0 +1,25 @@
+properties:
+  docker:
+    type: array
+    desc:
+    properties:
+      username:
+        type: scalar
+        info: The username for the docker login
+      password:
+        type: scalar
+        info: The password for the docker login
+        sensitive: true
+      build:
+        type: array
+        info:
+        properties:
+          file:
+            type: scalar
+            info:
+          context:
+            type: scalar
+            info:
+      push:
+        type: array
+        info: The Docker Tags that should be pushed to the Docker Registry
