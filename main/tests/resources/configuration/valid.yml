@@ -2,6 +2,9 @@ version: 1
 
 properties:
   docker:
+    registry:
+      hostname: registry.example.com
+      namespace: foo/bar/baz
     username: foo
     password: bar
     build:

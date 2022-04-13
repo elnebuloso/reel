@@ -1,0 +1,13 @@
+version: 1
+
+properties:
+  docker:
+    registry:
+      hostname:
+      namespace:
+    username: "{{ env('DOCKER_LOGIN_USERNAME') }}"
+    password: "{{ env('DOCKER_LOGIN_PASSWORD') }}"
+    build:
+      file: Dockerfile
+      context: .
+    push: []
