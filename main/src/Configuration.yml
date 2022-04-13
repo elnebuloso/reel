@@ -1,25 +1,44 @@
 properties:
+  project:
+    type: array
+    info: The Project Configuration
+    properties:
+      name:
+        type: scalar
+      folder:
+        type: scalar
+
   docker:
     type: array
-    desc:
+    info: The Docker Configuration
     properties:
+      registry:
+        type: array
+        info: The Docker Registry Configuration
+        properties:
+          hostname:
+            type: scalar
+            info: Hostname of the Docker Registry
+          namespace:
+            type: scalar
+            info: Namespace of the Docker Registry
       username:
         type: scalar
-        info: The username for the docker login
+        info: Username to use for the docker login against the Docker Registry
       password:
         type: scalar
-        info: The password for the docker login
+        info: Password to use for the docker login against the Docker Registry
         sensitive: true
       build:
         type: array
-        info:
+        info: The Docker Build Configuration
         properties:
           file:
             type: scalar
-            info:
+            info: Docker Filename
           context:
             type: scalar
-            info:
+            info: Docker Context
       push:
         type: array
-        info: The Docker Tags that should be pushed to the Docker Registry
+        info: The Docker Tags that should be pushed into the Docker Registry
