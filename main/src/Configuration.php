@@ -3,8 +3,6 @@
 namespace App;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
-use Symfony\Component\Config\Definition\Builder\NodeBuilder;
-use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -105,6 +103,14 @@ class Configuration implements ConfigurationInterface
         foreach ($configuration as $name => $data) {
             $property = new ConfigurationProperty($name, $parent);
             $property->setType($data["type"]);
+
+            if (array_key_exists("info", $data)) {
+                $property->setInfo($data["info"]);
+            }
+
+            if (array_key_exists("sensitive", $data)) {
+                $property->setSensitive($data["sensitive"]);
+            }
 
             if (array_key_exists("properties", $data) && is_array($data["properties"])) {
                 $this->buildProperties($data["properties"], $property);

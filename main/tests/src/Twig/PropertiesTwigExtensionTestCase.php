@@ -135,6 +135,8 @@ class PropertiesTwigExtensionTestCase extends TestCase
     public function testFile(): void
     {
         $extension = new PropertiesTwigExtension();
-        $this->assertEquals("foo", $extension->file(__DIR__ . "/resources/foo.txt"));
+        file_put_contents("/tmp/foo.txt", "foo");
+        $this->assertEquals("foo", $extension->file("/tmp/foo.txt"));
+        unlink("/tmp/foo.txt");
     }
 }

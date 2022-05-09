@@ -27,7 +27,7 @@ class ConfigurationProperty
     /**
      * @var string|null
      */
-    private ?string $desc = null;
+    private ?string $info = null;
 
     /**
      * @var bool
@@ -43,7 +43,7 @@ class ConfigurationProperty
      * @param string $name
      * @param ConfigurationProperty|null $parent
      */
-    public function __construct(string $name, ?ConfigurationProperty $parent)
+    public function __construct(string $name, ?ConfigurationProperty $parent = null)
     {
         $this->name = $name;
         $this->parent = $parent;
@@ -84,17 +84,17 @@ class ConfigurationProperty
     /**
      * @return string|null
      */
-    public function getDesc(): ?string
+    public function getInfo(): ?string
     {
-        return $this->desc;
+        return $this->info;
     }
 
     /**
-     * @param string|null $desc
+     * @param string|null $info
      */
-    public function setDesc(?string $desc): void
+    public function setInfo(?string $info): void
     {
-        $this->desc = $desc;
+        $this->info = $info;
     }
 
     /**
