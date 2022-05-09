@@ -35,7 +35,10 @@ class ConfigurationCompilerTestCase extends TestCase
     public function compileDataProvider(): array
     {
         return [
-            ["config" => [], "expected" => []]
+            [["config" => ["foo" => "foo"], "expected" => ["foo" => "foo"]]],
+            [["config" => ["foo" => "{{ 'Foo Bar Baz'|slugify }}"], "expected" => ["foo" => "foo-bar-baz"]]],
+            [["config" => ["foo" => ["bar" => "bar", "baz" => "{{ foo.bar }}"]], "expected" => ["foo" => ["bar" => "bar", "baz" => "bar"]]]],
+            [["config" => ["foo" => true], "expected" => ["foo" => true]]],
         ];
     }
 }
