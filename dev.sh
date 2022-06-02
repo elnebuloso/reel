@@ -34,13 +34,18 @@ case $1 in
   chmod +x dev.sh
   git update-index --chmod=+x dev.sh
 
-  dos2unix reel.sh
-  chmod +x reel.sh
-  git update-index --chmod=+x reel.sh
+  dos2unix reelx.sh
+  chmod +x reelx.sh
+  git update-index --chmod=+x reelx.sh
   ;;
 
 "build")
   docker build ${_ARGS_BUILD_[*]} --tag ${_DEV_IMAGE_} .
+  ;;
+
+"push")
+  docker tag ${_DEV_IMAGE_} elnebuloso/reel:latest
+  docker push elnebuloso/reel:latest
   ;;
 
 "install")
@@ -86,7 +91,7 @@ case $1 in
 
   _ARGS_RUN_+=("${_DEV_IMAGE_}")
 
-  if [[ -z "${@:3}" ]]; then
+  if [[ "$3" == "bash" ]]; then
     docker run ${_ARGS_RUN_[*]} bash
   else
     docker run ${_ARGS_RUN_[*]} "${@:3}"

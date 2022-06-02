@@ -23,8 +23,8 @@ Download and install the latest reel script for the current version
 #### Linux
 
 ```shell
-curl -sSL https://raw.githubusercontent.com/elnebuloso/reel/main/reel.sh -o /usr/local/bin/reel \
-&& chmod +x /usr/local/bin/reel
+curl -sSL https://raw.githubusercontent.com/elnebuloso/reel/main/reelx.sh -o /usr/local/bin/reelx \
+&& chmod +x /usr/local/bin/reelx
 ```
 
 ### Run
@@ -73,14 +73,20 @@ Run Tests, requires building Reel
 ./dev.sh test
 ```
 
-Run Reel Bash in demo/base directory, also supporting bash completion
+Run a Reel Bash in demo/base directory, also supporting bash completion
 
 ```shell
-./dev.sh demo base reel bash
+./dev.sh demo base bash
 ```
 
-Run Reel Command in demo/base directory
+Run a Reel Command in demo/base directory
 
 ```shell
 ./dev.sh demo base reel <command>
+```
+
+Run a Command in demo/base directory
+
+```shell
+./dev.sh demo base <command>
 ```

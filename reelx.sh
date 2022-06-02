@@ -2,9 +2,8 @@
 
 DEV="no"
 DEV_IMAGE="reel-dev"
-IMAGE="elnebuloso/reel:0"
+IMAGE="elnebuloso/reel:latest"
 SKIP_PULL="no"
-SHELL="no"
 
 _ARGS_=()
 
@@ -19,11 +18,8 @@ while [ $# -gt 0 ]; do
   --skip-pull)
     SKIP_PULL="yes"
     ;;
-  --shell)
-    SHELL="yes"
-    ;;
   *)
-    _ARGS_+=($1)
+    _ARGS_+=("$1")
     ;;
   esac
   shift
@@ -55,12 +51,16 @@ if [[ -f "$(pwd)/.reel.env.local" ]]; then
   _ARGS_RUN_+=("--env-file $(pwd)/.reel.env.local")
 fi
 
-_ARGS_RUN_+=($IMAGE)
+if [[ "${_ARGS_[0]}" = "" ]]; then
+  echo "missing command"
+  exit 1
+fi
 
-if [[ "$SHELL" = "yes" ]]; then
+_ARGS_RUN_+=("$IMAGE")
+
+if [[ "${_ARGS_[0]}" = "bash" ]]; then
   _ARGS_RUN_+=("bash")
 else
-  _ARGS_RUN_+=("reel")
   _ARGS_RUN_+=("${_ARGS_[*]}")
 fi
 
