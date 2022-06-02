@@ -34,7 +34,7 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder("redo");
+        $treeBuilder = new TreeBuilder("reel");
 
         $rootNode = $treeBuilder->getRootNode();
         $rootNode->append($this->createVersionNode());

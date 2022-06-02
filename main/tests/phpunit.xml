@@ -8,7 +8,7 @@
     </coverage>
     <php>
         <ini name="memory_limit" value="-1" />
-        <env name="REDO_PHPUNIT_UUID" value="d8dfd6ff-05f9-498d-bd68-9bec4425b89c" />
+        <env name="REEL_PHPUNIT_UUID" value="d8dfd6ff-05f9-498d-bd68-9bec4425b89c" />
     </php>
     <testsuites>
         <testsuite name="all">

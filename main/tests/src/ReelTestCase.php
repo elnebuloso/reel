@@ -2,13 +2,13 @@
 
 namespace AppTests;
 
-use App\Redo;
+use App\Reel;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class RedoTestCase
+ * Class ReelTestCase
  */
-class RedoTestCase extends TestCase
+class ReelTestCase extends TestCase
 {
     /**
      * @test
@@ -16,6 +16,6 @@ class RedoTestCase extends TestCase
      */
     public function testMajorVersion(): void
     {
-        $this->assertEquals(1, Redo::VERSION_MAJOR);
+        $this->assertEquals(1, Reel::VERSION_MAJOR);
     }
 }

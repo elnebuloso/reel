@@ -6,7 +6,7 @@ require __DIR__ . '/vendor/autoload.php';
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 
-$app = new Application("redo", file_get_contents('/VERSION'));
+$app = new Application("reel", file_get_contents('/VERSION'));
 $app->add(new \App\Commands\Docker\BuildCommand());
 $app->add(new \App\Commands\Docker\PushCommand());
 $app->add(new \App\Commands\PropertiesCommand());

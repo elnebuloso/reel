@@ -11,19 +11,19 @@ RUN apk add --no-cache \
     docker \
     docker-compose
 
-COPY main /redo
+COPY main /reel
 COPY VERSION /VERSION
 COPY docker/bin /usr/local/bin
 
 RUN find /usr/local/bin -type f -name '*.sh' | while read f; do mv "$f" "${f%.sh}"; done \
  && chmod +x /usr/local/bin/* \
  && echo 'source /etc/profile' > /root/.bashrc \
- && echo 'eval "$(/redo/redo completion bash)"' >> /root/.bashrc \
- && echo "alias redo='/redo/redo'" >> /root/.bashrc \
- && ln -s /redo/redo /usr/local/bin/redo
+ && echo 'eval "$(/reel/reel completion bash)"' >> /root/.bashrc \
+ && echo "alias reel='/reel/reel'" >> /root/.bashrc \
+ && ln -s /reel/reel /usr/local/bin/reel
 
-ENV REDO_VERBOSE_LEVEL 0
-ENV REDO_DOCKERCEPTION_PULL_POLICY IfNotPresent
+ENV REEL_VERBOSE_LEVEL 0
+ENV REEL_DOCKERCEPTION_PULL_POLICY IfNotPresent
 
 WORKDIR /app
 

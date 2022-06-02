@@ -46,7 +46,7 @@ REEL_ANSIBLE_LINT_DIR=main
 Usage
 
 ```shell
-# redo development
+# reel development
 ./dev.sh test base ansible-lint --version
 ./dev.sh test base ansible-lint --version --REEL_ANSIBLE_LINT_IMG=cytopia/ansible-lint:5
 ```
@@ -64,7 +64,7 @@ REEL_COMPASS_DIR=main
 Usage
 
 ```shell
-# redo development
+# reel development
 ./dev.sh test base compass --version
 ./dev.sh test base compass --version --REEL_COMPASS_IMG=1.0.3
 ```
@@ -82,7 +82,7 @@ REEL_CSSO_DIR=main
 Usage
 
 ```shell
-# redo development
+# reel development
 ./dev.sh test base csso --version
 ./dev.sh test base csso --version --REEL_CSSO_IMG=4.1.0
 ```
@@ -100,7 +100,7 @@ REEL_HADOLINT_DIR=.
 Usage
 
 ```shell
-# redo development
+# reel development
 ./dev.sh test base hadolint --version
 ./dev.sh test base hadolint --version --REEL_HADOLINT_IMG=2.8.0-alpine
 ```
@@ -118,7 +118,7 @@ REEL_HELM_DIR=.
 Usage
 
 ```shell
-# redo development
+# reel development
 ./dev.sh test base helm version
 ./dev.sh test base helm version --REEL_HELM_IMG=alpine/helm:3.8.0
 ```
@@ -136,7 +136,7 @@ REEL_NPM_DIR=main
 Usage
 
 ```shell
-# redo development
+# reel development
 ./dev.sh test base npm --version
 ./dev.sh test base yarn --version --REEL_NPM_IMG=node:12
 ```
@@ -154,7 +154,7 @@ REEL_YARN_DIR=main
 Usage
 
 ```sh
-# redo development
+# reel development
 ./dev.sh test base yarn --version
 ./dev.sh test base yarn --version --REEL_YARN_IMG=node:12
 ```

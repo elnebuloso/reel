@@ -125,7 +125,7 @@ class PropertiesTwigExtensionTestCase extends TestCase
     public function testEnv(): void
     {
         $extension = new PropertiesTwigExtension();
-        $this->assertEquals("d8dfd6ff-05f9-498d-bd68-9bec4425b89c", $extension->env("REDO_PHPUNIT_UUID"));
+        $this->assertEquals("d8dfd6ff-05f9-498d-bd68-9bec4425b89c", $extension->env("REEL_PHPUNIT_UUID"));
     }
 
     /**

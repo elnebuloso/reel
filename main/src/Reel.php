@@ -3,9 +3,9 @@
 namespace App;
 
 /**
- * Class Redo
+ * Class Reel
  */
-class Redo
+class Reel
 {
     const VERSION_MAJOR = 1;
 }
