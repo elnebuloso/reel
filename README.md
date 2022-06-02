@@ -1,4 +1,4 @@
-# redo
+# Reel
 
 CI/CD Abstraction Command Line Runner
 
@@ -22,45 +22,45 @@ CI/CD Abstraction Command Line Runner
 
 ### Installation
 
-Download and install the latest redo bash script for the current version
+Download and install the latest reel bash script for the current version
 
 #### Linux
 
 ```shell
-curl -sSL https://raw.githubusercontent.com/elnebuloso/redo/main/redo.sh -o /usr/local/bin/redo \
-&& chmod +x /usr/local/bin/redo
+curl -sSL https://raw.githubusercontent.com/elnebuloso/reel/main/reel.sh -o /usr/local/bin/reel \
+&& chmod +x /usr/local/bin/reel
 ```
 
 ### Run
 
 ```shell
-redo list
-redo docker:build
+reel list
+reel docker:build
 ```
 
 #### Interactive mode with code completion
 
-If you want to keep redo open in interactive mode with code completion, run redo with **--watch** option.
+If you want to keep reel open in interactive mode with code completion, run reel with **--watch** option.
 
 ```shell
-redo --shell
+reel --shell
 ```
 
 ### Configuration
 
-Redo can be completely configured via environment variables.
+Reel can be completely configured via environment variables.
 
-To easily configure the environment variables during local development with REDO, simply place a .redo.env file in the root directory of the respective project and configure redo with the variables defined there.
+To easily configure the environment variables during local development, simply place a .reel.env file in the root directory of the respective project and configure Reel with the variables defined there.
 
 #### Environment Variables
 
-##### REDO_VERBOSE_LEVEL
+##### REEL_VERBOSE_LEVEL
 
 - **0** - no logging (Default)
 - **1** - info messages
 - **2** - debug messages
 
-##### REDO_DOCKERCEPTION_PULL_POLICY
+##### REEL_DOCKERCEPTION_PULL_POLICY
 
 - IfNotPresent (Default)
 - Always
@@ -82,17 +82,17 @@ Provided Tools via Dockerception calls
 Environment Variables
 
 ```shell
-REDO_ANSIBLE_LINT_IMG=cytopia/ansible-lint:latest
-REDO_ANSIBLE_LINT_CMD=
-REDO_ANSIBLE_LINT_DIR=main
+REEL_ANSIBLE_LINT_IMG=cytopia/ansible-lint:latest
+REEL_ANSIBLE_LINT_CMD=
+REEL_ANSIBLE_LINT_DIR=main
 ```
 
 Usage
 
 ```shell
 # redo development
-./app.sh test base ansible-lint --version
-./app.sh test base ansible-lint --version --REDO_ANSIBLE_LINT_IMG=cytopia/ansible-lint:5
+./dev.sh test base ansible-lint --version
+./dev.sh test base ansible-lint --version --REEL_ANSIBLE_LINT_IMG=cytopia/ansible-lint:5
 ```
 
 ### compass
@@ -100,17 +100,17 @@ Usage
 Environment Variables
 
 ```shell
-REDO_COMPASS_IMG=elnebuloso/compass:latest
-REDO_COMPASS_CMD=compass
-REDO_COMPASS_DIR=main
+REEL_COMPASS_IMG=elnebuloso/compass:latest
+REEL_COMPASS_CMD=compass
+REEL_COMPASS_DIR=main
 ```
 
 Usage
 
 ```shell
 # redo development
-./app.sh test base compass --version
-./app.sh test base compass --version --REDO_COMPASS_IMG=1.0.3
+./dev.sh test base compass --version
+./dev.sh test base compass --version --REEL_COMPASS_IMG=1.0.3
 ```
 
 ### csso
@@ -118,17 +118,17 @@ Usage
 Environment Variables
 
 ```shell
-REDO_CSSO_IMG=elnebuloso/csso-cli:latest
-REDO_CSSO_CMD=
-REDO_CSSO_DIR=main
+REEL_CSSO_IMG=elnebuloso/csso-cli:latest
+REEL_CSSO_CMD=
+REEL_CSSO_DIR=main
 ```
 
 Usage
 
 ```shell
 # redo development
-./app.sh test base csso --version
-./app.sh test base csso --version --REDO_CSSO_IMG=4.1.0
+./dev.sh test base csso --version
+./dev.sh test base csso --version --REEL_CSSO_IMG=4.1.0
 ```
 
 ### hadolint
@@ -136,17 +136,17 @@ Usage
 Environment Variables
 
 ```shell
-REDO_HADOLINT_IMG=hadolint/hadolint:latest
-REDO_HADOLINT_CMD=hadolint
-REDO_HADOLINT_DIR=.
+REEL_HADOLINT_IMG=hadolint/hadolint:latest
+REEL_HADOLINT_CMD=hadolint
+REEL_HADOLINT_DIR=.
 ```
 
 Usage
 
 ```shell
 # redo development
-./app.sh test base hadolint --version
-./app.sh test base hadolint --version --REDO_HADOLINT_IMG=2.8.0-alpine
+./dev.sh test base hadolint --version
+./dev.sh test base hadolint --version --REEL_HADOLINT_IMG=2.8.0-alpine
 ```
 
 ### helm
@@ -154,17 +154,17 @@ Usage
 Environment Variables
 
 ```shell
-REDO_HELM_IMG=alpine/helm:latest
-REDO_HELM_CMD=
-REDO_HELM_DIR=.
+REEL_HELM_IMG=alpine/helm:latest
+REEL_HELM_CMD=
+REEL_HELM_DIR=.
 ```
 
 Usage
 
 ```shell
 # redo development
-./app.sh test base helm version
-./app.sh test base helm version --REDO_HELM_IMG=alpine/helm:3.8.0
+./dev.sh test base helm version
+./dev.sh test base helm version --REEL_HELM_IMG=alpine/helm:3.8.0
 ```
 
 ### npm
@@ -172,17 +172,17 @@ Usage
 Environment Variables
 
 ```shell
-REDO_NPM_IMG=node:alpine
-REDO_NPM_CMD=npm
-REDO_NPM_DIR=main
+REEL_NPM_IMG=node:alpine
+REEL_NPM_CMD=npm
+REEL_NPM_DIR=main
 ```
 
 Usage
 
 ```shell
 # redo development
-./app.sh test base npm --version
-./app.sh test base yarn --version --REDO_NPM_IMG=node:12
+./dev.sh test base npm --version
+./dev.sh test base yarn --version --REEL_NPM_IMG=node:12
 ```
 
 ### yarn
@@ -190,17 +190,17 @@ Usage
 Environment Variables
 
 ```shell
-REDO_YARN_IMG=node:alpine
-REDO_YARN_CMD=yarn
-REDO_YARN_DIR=main
+REEL_YARN_IMG=node:alpine
+REEL_YARN_CMD=yarn
+REEL_YARN_DIR=main
 ```
 
 Usage
 
 ```sh
 # redo development
-./app.sh test base yarn --version
-./app.sh test base yarn --version --REDO_YARN_IMG=node:12
+./dev.sh test base yarn --version
+./dev.sh test base yarn --version --REEL_YARN_IMG=node:12
 ```
 
 ## Development / Contribute
@@ -208,36 +208,36 @@ Usage
 Prepare redo application for local development
 
 ```shell
-./app.sh prepare
+./dev.sh prepare
 ```
 
 Build redo application container for local development
 
 ```shell
-./app.sh build
+./dev.sh build
 ```
 
 Install or Update Dependencies, requires building the redo application container
 
 ```shell
-./app.sh install
-./app.sh update
+./dev.sh install
+./dev.sh update
 ```
 
 Run Tests, requires building the redo application container
 
 ```shell
-./app.sh tests
+./dev.sh tests
 ```
 
 Run redo in an interactive bash in test/base directory, also supporting bash completion
 
 ```shell
-./app.sh demo base bash
+./dev.sh demo base bash
 ```
 
 Run redo commands and dockerception in test/base directory
 
 ```shell
-./app.sh demo base redo docker:build
+./dev.sh demo base redo docker:build
 ```

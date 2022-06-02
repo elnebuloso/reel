@@ -1,6 +1,6 @@
 #!/bin/bash
 
-_DEV_IMAGE_="redo-dev"
+_DEV_IMAGE_="reel-dev"
 
 _ARGS_BUILD_=()
 _ARGS_BUILD_+=("--rm")
@@ -16,27 +16,27 @@ _ARGS_RUN_+=("--volume /var/run/docker.sock:/var/run/docker.sock")
 _ARGS_RUN_+=("--volume $(pwd):$(pwd)")
 _ARGS_RUN_+=("--workdir $(pwd)")
 
-if [[ -f "$(pwd)/.redo.env" ]]; then
-  _ARGS_RUN_+=("--env-file $(pwd)/.redo.env")
+if [[ -f "$(pwd)/.reel.env" ]]; then
+  _ARGS_RUN_+=("--env-file $(pwd)/.reel.env")
 fi
 
-if [[ -f "$(pwd)/.redo.env.local" ]]; then
-  _ARGS_RUN_+=("--env-file $(pwd)/.redo.env.local")
+if [[ -f "$(pwd)/.reel.env.local" ]]; then
+  _ARGS_RUN_+=("--env-file $(pwd)/.reel.env.local")
 fi
 
 case $1 in
 "prepare")
-  dos2unix main/redo
-  chmod +x main/redo
-  git update-index --chmod=+x main/redo
+  dos2unix main/reel
+  chmod +x main/reel
+  git update-index --chmod=+x main/reel
 
-  dos2unix app.sh
-  chmod +x app.sh
-  git update-index --chmod=+x app.sh
+  dos2unix dev.sh
+  chmod +x dev.sh
+  git update-index --chmod=+x dev.sh
 
-  dos2unix redo.sh
-  chmod +x redo.sh
-  git update-index --chmod=+x redo.sh
+  dos2unix reel.sh
+  chmod +x reel.sh
+  git update-index --chmod=+x reel.sh
   ;;
 
 "build")
@@ -62,7 +62,7 @@ case $1 in
   _ARGS_+=("phpunit")
   _ARGS_+=("--configuration ./main/tests/phpunit.xml")
   _ARGS_+=("--bootstrap ./main/tests/bootstrap.php")
-  _ARGS_+=("--coverage-html ./.redo/reports/phpunit/all/coverage/html")
+  _ARGS_+=("--coverage-html ./.reel/reports/phpunit/all/coverage/html")
   _ARGS_+=("--testsuite all")
   docker run ${_ARGS_RUN_[*]} ${_DEV_IMAGE_} ${_ARGS_[*]}
   ;;
@@ -73,15 +73,15 @@ case $1 in
   _ARGS_RUN_+=("--interactive")
   _ARGS_RUN_+=("--rm")
   _ARGS_RUN_+=("--volume /var/run/docker.sock:/var/run/docker.sock")
-  _ARGS_RUN_+=("--volume $(pwd)/main:/redo --volume $(pwd)/VERSION:/VERSION")
-  _ARGS_RUN_+=("--volume $(pwd)/test/$2:$(pwd)/test/$2 --workdir $(pwd)/test/$2")
+  _ARGS_RUN_+=("--volume $(pwd)/main:/reel --volume $(pwd)/VERSION:/VERSION")
+  _ARGS_RUN_+=("--volume $(pwd)/demo/$2:$(pwd)/demo/$2 --workdir $(pwd)/demo/$2")
 
-  if [[ -f "$(pwd)/test/$2/.redo.env" ]]; then
-    _ARGS_RUN_+=("--env-file $(pwd)/test/$2/.redo.env")
+  if [[ -f "$(pwd)/demo/$2/.reel.env" ]]; then
+    _ARGS_RUN_+=("--env-file $(pwd)/demo/$2/.reel.env")
   fi
 
-  if [[ -f "$(pwd)/test/$2/.redo.env.local" ]]; then
-    _ARGS_RUN_+=("--env-file $(pwd)/test/$2/.redo.env.local")
+  if [[ -f "$(pwd)/demo/$2/.reel.env.local" ]]; then
+    _ARGS_RUN_+=("--env-file $(pwd)/demo/$2/.reel.env.local")
   fi
 
   _ARGS_RUN_+=("${_DEV_IMAGE_}")

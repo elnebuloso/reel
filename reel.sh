@@ -1,8 +1,8 @@
 #!/bin/bash
 
 DEV="no"
-DEV_IMAGE="redo-dev"
-IMAGE="elnebuloso/redo:0"
+DEV_IMAGE="reel-dev"
+IMAGE="elnebuloso/reel:0"
 SKIP_PULL="no"
 SHELL="no"
 
@@ -47,12 +47,12 @@ _ARGS_RUN_+=("--volume /var/run/docker.sock:/var/run/docker.sock")
 _ARGS_RUN_+=("--volume $(pwd):$(pwd)")
 _ARGS_RUN_+=("--workdir $(pwd)")
 
-if [[ -f "$(pwd)/.redo.env" ]]; then
-  _ARGS_RUN_+=("--env-file $(pwd)/.redo.env")
+if [[ -f "$(pwd)/.reel.env" ]]; then
+  _ARGS_RUN_+=("--env-file $(pwd)/.reel.env")
 fi
 
-if [[ -f "$(pwd)/.redo.env.local" ]]; then
-  _ARGS_RUN_+=("--env-file $(pwd)/.redo.env.local")
+if [[ -f "$(pwd)/.reel.env.local" ]]; then
+  _ARGS_RUN_+=("--env-file $(pwd)/.reel.env.local")
 fi
 
 _ARGS_RUN_+=($IMAGE)
@@ -60,7 +60,7 @@ _ARGS_RUN_+=($IMAGE)
 if [[ "$SHELL" = "yes" ]]; then
   _ARGS_RUN_+=("bash")
 else
-  _ARGS_RUN_+=("redo")
+  _ARGS_RUN_+=("reel")
   _ARGS_RUN_+=("${_ARGS_[*]}")
 fi
 
