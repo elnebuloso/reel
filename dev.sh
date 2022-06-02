@@ -57,7 +57,7 @@ case $1 in
   docker run ${_ARGS_RUN_[*]} ${_DEV_IMAGE_} ${_ARGS_[*]}
   ;;
 
-"tests")
+"test")
   _ARGS_=()
   _ARGS_+=("phpunit")
   _ARGS_+=("--configuration ./main/tests/phpunit.xml")

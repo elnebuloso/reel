@@ -70,7 +70,7 @@ Update Dependencies, requires building Reel
 Run Tests, requires building Reel
 
 ```shell
-./dev.sh tests
+./dev.sh test
 ```
 
 Run Reel Bash in demo/base directory, also supporting bash completion
