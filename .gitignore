@@ -1,7 +1,9 @@
 /.idea
 /.redo
 /.redo.env.local
+/.reel
+/.reel.env.local
 
 /main/vendor
 /main/tests/.phpunit.result.cache
-/phpunit-9.5.10.phar
+/main/demo/.phpunit.result.cache
