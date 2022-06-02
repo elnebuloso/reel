@@ -2,7 +2,7 @@
 
 set -e
 
-: "${REDO_VERBOSE_LEVEL:=0}"
+: "${REEL_VERBOSE_LEVEL:=0}"
 
 _RUN_=()
 _RUN_+=("docker")
@@ -13,7 +13,7 @@ _RUN_+=("--volume $(pwd)/$1:$2")
 _RUN_+=("--workdir $2")
 _RUN_+=("${@:3}")
 
-if [[ ${REDO_VERBOSE_LEVEL} -ge 2 ]]; then
+if [[ ${REEL_VERBOSE_LEVEL} -ge 2 ]]; then
   echo -e "\e[36m${_RUN_[*]}\e[0m"
 fi
 

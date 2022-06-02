@@ -2,22 +2,22 @@
 
 set -e
 
-: "${REDO_NPM_IMG:=node:alpine}"
-: "${REDO_NPM_CMD:=npm}"
-: "${REDO_NPM_DIR:=main}"
+: "${REEL_NPM_IMG:=node:alpine}"
+: "${REEL_NPM_CMD:=npm}"
+: "${REEL_NPM_DIR:=main}"
 
 _ARGS_=()
 
 while [ $# -gt 0 ]; do
   case "$1" in
-  --REDO_NPM_IMG=*)
-    REDO_NPM_IMG="${1#*=}"
+  --REEL_NPM_IMG=*)
+    REEL_NPM_IMG="${1#*=}"
     ;;
-  --REDO_NPM_CMD=*)
-    REDO_NPM_CMD="${1#*=}"
+  --REEL_NPM_CMD=*)
+    REEL_NPM_CMD="${1#*=}"
     ;;
-  --REDO_NPM_DIR=*)
-    REDO_NPM_DIR="${1#*=}"
+  --REEL_NPM_DIR=*)
+    REEL_NPM_DIR="${1#*=}"
     ;;
   *)
     _ARGS_+=($1)
@@ -27,9 +27,9 @@ while [ $# -gt 0 ]; do
 done
 
 _ARGS_RUN_=()
-_ARGS_RUN_+=("$REDO_NPM_IMG")
-_ARGS_RUN_+=("$REDO_NPM_CMD")
+_ARGS_RUN_+=("$REEL_NPM_IMG")
+_ARGS_RUN_+=("$REEL_NPM_CMD")
 _ARGS_RUN_+=("${_ARGS_[*]}")
 
-dockerception-pull $REDO_NPM_IMG
-dockerception-run $REDO_NPM_DIR /app ${_ARGS_RUN_[*]}
+dockerception-pull $REEL_NPM_IMG
+dockerception-run $REEL_NPM_DIR /app ${_ARGS_RUN_[*]}
