@@ -1,6 +1,6 @@
 # Reel
 
-Development and CI/CD Abstraction (Currently under heavy development)
+Development and CI/CD Abstraction
 
 ## Table of contents
 
