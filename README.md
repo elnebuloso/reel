@@ -2,32 +2,31 @@
 
 Development and CI/CD Abstraction
 
-## Currently, under heavy development
+***Currently under heavy development***
 
 ## Table of contents
 
-1. [Usage](#usage)
-2. [Development / Contribute](#development--contribute)
-3. [Documentation](docs/index.md)
+1. [Requirements](#requirements)
+2. [Installation](#installation)
+3. [Usage](#usage)
+4. [Development / Contribute](#development--contribute)
+5. [Documentation](docs/index.md)
 
-## Usage
-
-### Requirements
+## Requirements
 
 - Docker
 
-### Installation
+## Installation
 
-Download and install the latest reelx (Reel Execution) script for the current version
+Download and install the latest **Reelx**, Reel Execution script for the current version
 
 #### Linux
 
 ```shell
-curl -sSL https://raw.githubusercontent.com/elnebuloso/reel/main/reelx.sh -o /usr/local/bin/reelx \
-&& chmod +x /usr/local/bin/reelx
+curl -sSL https://raw.githubusercontent.com/elnebuloso/reel/main/reelx.sh -o /usr/local/bin/reelx && chmod +x /usr/local/bin/reelx
 ```
 
-### Run
+## Usage
 
 Run Reel bash on current working directory, also supporting bash completion
 
