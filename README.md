@@ -32,13 +32,19 @@ curl -sSL https://raw.githubusercontent.com/elnebuloso/reel/main/reelx.sh -o /us
 Run Reel bash, also supporting bash completion
 
 ```shell
-reel bash
+reelx bash
 ```
 
-Run Reel a command
+Run a Reel Command
 
 ```shell
-reel <command>
+reelx reel <command>
+```
+
+Run a Command
+
+```shell
+reelx <command>
 ```
 
 ## Development / Contribute
