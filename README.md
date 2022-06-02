@@ -23,7 +23,8 @@ Download and install the latest **Reelx**, Reel Execution script for the current
 #### Linux
 
 ```shell
-curl -sSL https://raw.githubusercontent.com/elnebuloso/reel/main/reelx.sh -o /usr/local/bin/reelx && chmod +x /usr/local/bin/reelx
+curl -sSL https://raw.githubusercontent.com/elnebuloso/reel/main/reelx.sh -o /usr/local/bin/reelx \
+&& chmod +x /usr/local/bin/reelx
 ```
 
 ## Usage
