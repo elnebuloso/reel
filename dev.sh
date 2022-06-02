@@ -26,6 +26,8 @@ fi
 
 case $1 in
 "prepare")
+  curl -sSL https://phar.phpunit.de/phpunit-9.phar -o ./phpunit-9.phar
+
   dos2unix main/reel
   chmod +x main/reel
   git update-index --chmod=+x main/reel

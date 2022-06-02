@@ -18,7 +18,7 @@ Development and CI/CD Abstraction
 
 ### Installation
 
-Download and install the latest reel script for the current version
+Download and install the latest reelx (Reel Execution) script for the current version
 
 #### Linux
 
@@ -29,19 +29,19 @@ curl -sSL https://raw.githubusercontent.com/elnebuloso/reel/main/reelx.sh -o /us
 
 ### Run
 
-Run Reel bash, also supporting bash completion
+Run Reel bash on current working directory, also supporting bash completion
 
 ```shell
 reelx bash
 ```
 
-Run a Reel Command
+Run a Reel Command on current working directory, see [Reel Commands](docs/commands/reel.md)
 
 ```shell
 reelx reel <command>
 ```
 
-Run a Command
+Run a Command on current working directory, see [Commands](docs/commands.md)
 
 ```shell
 reelx <command>
