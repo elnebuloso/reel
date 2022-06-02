@@ -34,6 +34,7 @@ class PropertiesTwigExtension extends AbstractExtension
         return [
             new TwigFunction("env", [$this, "env"]),
             new TwigFunction("file", [$this, "file"]),
+            new TwigFunction("current_dir", [$this, "currentDir"]),
         ];
     }
 
@@ -100,5 +101,13 @@ class PropertiesTwigExtension extends AbstractExtension
     public function file(string $filename): string
     {
         return trim(file_get_contents($filename));
+    }
+
+    /**
+     * @return string
+     */
+    public function currentDir(): string
+    {
+        return getcwd();
     }
 }

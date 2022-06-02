@@ -6,6 +6,17 @@ require __DIR__ . '/vendor/autoload.php';
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 
+$processor = new \App\ConfigurationProcessor();
+$compiler = new \App\ConfigurationCompiler();
+
+$configuration = $processor->process([
+    __DIR__ . "/reel.yml"
+]);
+
+$properties = $compiler->compile($configuration["properties"]);
+var_dump($properties);
+var_dump(getcwd());
+
 $app = new Application("reel", file_get_contents('/VERSION'));
 $app->add(new \App\Commands\Docker\BuildCommand());
 $app->add(new \App\Commands\Docker\PushCommand());

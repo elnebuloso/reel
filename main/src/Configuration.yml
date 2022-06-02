@@ -3,10 +3,15 @@ properties:
     type: array
     info: The Project Configuration
     properties:
+      root:
+        type: scalar
+        info: The Root Directory of the Project
       name:
         type: scalar
-      folder:
+        info: The Name of the Project
+      slug:
         type: scalar
+        info: The Slug of the Name of the Project
 
   docker:
     type: array

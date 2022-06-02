@@ -1,3 +1,5 @@
-reel:
-  properties:
-    project_name: "reel/demo/base"
+version: 1
+
+properties:
+  project:
+    name: "reel/demo/base"

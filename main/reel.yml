@@ -1,6 +1,13 @@
+#
+# Reel Base Properties and Configuration
+#
 version: 1
 
 properties:
+  project:
+    root: "{{ current_dir() }}"
+    name: "{{ project.root|basename }}"
+    slug: "{{ project.name|slugify }}"
   docker:
     registry:
       hostname:
