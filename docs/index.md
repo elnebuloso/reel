@@ -1,31 +1,37 @@
 # Documentation
 
-## Currently, under heavy development
+## Table of contents
 
-### Configuration
+1. [Configuration](#configuration)
+2. [Commands](#commands)
+
+## Configuration
 
 Reel can be completely configured via environment variables.
 
-To easily configure the environment variables during local development, simply place a .reel.env file in the root directory of the respective project and configure Reel with the variables defined there.
+To easily configure the environment variables during local development, 
+simply place a .reel.env file in the root directory of the respective project and configure Reel with the variables defined there.
 
-#### Environment Variables
+### Environment Variables
 
-##### REEL_VERBOSE_LEVEL
+#### REEL_VERBOSE_LEVEL
 
 - **0** - no logging (Default)
 - **1** - info messages
 - **2** - debug messages
 
-##### REEL_DOCKERCEPTION_PULL_POLICY
+#### REEL_DOCKERCEPTION_PULL_POLICY
 
 - IfNotPresent (Default)
 - Always
 
-## Dockerception
+## Commands
 
-Provided Tools via Dockerception calls
+### Dockerception
 
-- ansible-lint
+Provided Tools via Dockerception calls, Reel Calls this Commands via other Docker Containers.
+
+- [ansible-lint](commands.md#ansible-lint)
 - compass
 - csso
 - hadolint

@@ -1,7 +1,5 @@
 # Reel Commands
 
-This documentation is currently under heavy development.
-
 ## Usage
 
 Call a Reel Command
