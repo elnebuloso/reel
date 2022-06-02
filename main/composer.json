@@ -1,6 +1,6 @@
 {
-  "name": "elnebuloso/redo",
-  "description": "CI/CD Abstraction Command Line Runner",
+  "name": "elnebuloso/reel",
+  "description": "Development and CI/CD Abstraction",
   "license": "MIT",
   "type": "project",
   "require": {
