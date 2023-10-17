@@ -1,4 +1,4 @@
-desc: Push a Docker Container
+desc: push a docker image into a registry
 
 scripts:
   - docker --version
