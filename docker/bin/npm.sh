@@ -2,7 +2,7 @@
 
 set -e
 
-: "${REEL_NPM_IMG:=node:alpine}"
+: "${REEL_NPM_IMG:=node:20-alpine}"
 : "${REEL_NPM_CMD:=npm}"
 : "${REEL_NPM_DIR:=main}"
 

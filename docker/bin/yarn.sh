@@ -2,7 +2,7 @@
 
 set -e
 
-: "${REEL_YARN_IMG:=node:alpine}"
+: "${REEL_YARN_IMG:=node:20-alpine}"
 : "${REEL_YARN_CMD:=yarn}"
 : "${REEL_YARN_DIR:=main}"
 
