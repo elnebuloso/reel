@@ -6,7 +6,7 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * Class ConfigurationProcessor
+ * ConfigurationProcessor
  */
 class ConfigurationProcessor
 {

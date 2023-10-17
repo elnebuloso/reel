@@ -7,13 +7,13 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class PropertiesCommand
+ * PropertiesCommand
  */
 class PropertiesCommand extends Command
 {
-    const NAME = "properties";
+    private const NAME = "properties";
 
-    const DESCRIPTION = "Show all evaluated and compiled available properties";
+    private const DESCRIPTION = "Show all evaluated and compiled available properties";
 
     /**
      * @return void

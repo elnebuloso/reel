@@ -3,7 +3,7 @@
 namespace App\Traits;
 
 /**
- * Class ArrayKeyPathsToScalarValuesTrait
+ * ArrayKeyPathsToScalarValuesTrait
  */
 trait ArrayKeyPathsToScalarValuesTrait
 {

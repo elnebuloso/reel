@@ -3,11 +3,16 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
+use App\CommandConfigFactory;
+use App\Commands\DynamicCommand;
+use App\ConfigurationCompiler;
+use App\ConfigurationProcessor;
+use App\ProcessFactory;
 use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Finder\Finder;
 
-$processor = new \App\ConfigurationProcessor();
-$compiler = new \App\ConfigurationCompiler();
+$processor = new ConfigurationProcessor();
+$compiler = new ConfigurationCompiler();
 
 $configuration = $processor->process([
     __DIR__ . "/reel.yml"
@@ -16,7 +21,46 @@ $configuration = $processor->process([
 $properties = $compiler->compile($configuration["properties"]);
 
 $app = new Application("reel", file_get_contents('/VERSION'));
-$app->add(new \App\Commands\Docker\BuildCommand());
-$app->add(new \App\Commands\Docker\PushCommand());
 $app->add(new \App\Commands\PropertiesCommand());
+
+loadReelCommands($app);
+loadCustomCommands($app);
+
 $app->run();
+
+/**
+ * @param Application $app
+ * @return void
+ */
+function loadReelCommands(Application $app): void
+{
+    loadCommands($app, __DIR__ . "/commands");
+}
+
+/**
+ * @param Application $app
+ * @return void
+ */
+function loadCustomCommands(Application $app): void
+{
+    loadCommands($app, getcwd() . "/.reel/commands", "app");
+}
+
+/**
+ * @param Application $app
+ * @param string $directory
+ * @param string $prefix
+ * @return void
+ */
+function loadCommands(Application $app, string $directory, string $prefix = ""): void
+{
+    $finder = new Finder();
+    $commandConfigFactory = new CommandConfigFactory($finder);
+    $commandConfigDirectory = realpath($directory);
+
+    if ($commandConfigDirectory) {
+        foreach ($commandConfigFactory->createCommandConfigs($commandConfigDirectory, $prefix) as $commandConfig) {
+            $app->add(new DynamicCommand($commandConfig, new ProcessFactory()));
+        }
+    }
+}

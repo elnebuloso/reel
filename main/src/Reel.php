@@ -3,7 +3,7 @@
 namespace App;
 
 /**
- * Class Reel
+ * Reel
  */
 class Reel
 {

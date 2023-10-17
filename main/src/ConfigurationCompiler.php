@@ -12,7 +12,7 @@ use Twig\Error\SyntaxError as TwigSyntaxError;
 use Twig\Loader\ArrayLoader as TwigArrayLoader;
 
 /**
- * Class ConfigurationCompiler
+ * ConfigurationCompiler
  */
 class ConfigurationCompiler
 {

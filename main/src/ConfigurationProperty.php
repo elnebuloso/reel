@@ -3,11 +3,11 @@
 namespace App;
 
 /**
- * Class ConfigurationProperty
+ * ConfigurationProperty
  */
 class ConfigurationProperty
 {
-    const TYPE_ARRAY = "array";
+    public const TYPE_ARRAY = "array";
 
     /**
      * @var string

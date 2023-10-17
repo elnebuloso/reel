@@ -9,7 +9,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * Class Configuration
+ * Configuration
  */
 class Configuration implements ConfigurationInterface
 {

@@ -3,12 +3,13 @@
 namespace App;
 
 use ArrayIterator;
+use IteratorAggregate;
 use Traversable;
 
 /**
- * Class ConfigurationPropertyCollection
+ * ConfigurationPropertyCollection
  */
-class ConfigurationPropertyCollection implements \IteratorAggregate
+class ConfigurationPropertyCollection implements IteratorAggregate
 {
     /**
      * @var array<ConfigurationProperty>

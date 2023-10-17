@@ -1,0 +1,5 @@
+desc: foo
+
+scripts:
+  - echo "Build a Docker Container"
+  - docker --version

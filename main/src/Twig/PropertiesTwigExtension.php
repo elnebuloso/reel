@@ -8,7 +8,7 @@ use Twig\TwigFunction;
 use Cocur\Slugify\Slugify;
 
 /**
- * Class PropertiesTwigExtension
+ * PropertiesTwigExtension
  */
 class PropertiesTwigExtension extends AbstractExtension
 {

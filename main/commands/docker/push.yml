@@ -1,0 +1,6 @@
+desc: Push a Docker Container
+
+scripts:
+  - echo "Push a Docker Container"
+  - echo "Push a Docker Container"
+  - echo "Push a Docker Container"
