@@ -1,4 +1,5 @@
-FROM php:8.1-alpine3.15 as prod
+# https://github.com/docker-library/docs/blob/master/php/README.md#supported-tags-and-respective-dockerfile-links
+FROM php:8.2.11-alpine3.18 as prod
 
 #
 # development layer for composer

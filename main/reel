@@ -14,8 +14,6 @@ $configuration = $processor->process([
 ]);
 
 $properties = $compiler->compile($configuration["properties"]);
-var_dump($properties);
-var_dump(getcwd());
 
 $app = new Application("reel", file_get_contents('/VERSION'));
 $app->add(new \App\Commands\Docker\BuildCommand());

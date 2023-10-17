@@ -1,9 +1,11 @@
-FROM php:8.1-alpine3.15 as prod
+# https://github.com/docker-library/docs/blob/master/php/README.md#supported-tags-and-respective-dockerfile-links
+FROM php:8.2.11-alpine3.18 as prod
 
 # As of Alpine Linux 3.3 there exists a new --no-cache option for apk.
 # It allows users to install packages with an index that is updated and used on-the-fly and not cached locally.
 # This avoids the need to use --update-cache and remove /var/cache/apk/* when done installing packages.
 RUN apk add --no-cache \
+    git \
     curl \
     ca-certificates \
     bash \
