@@ -1,16 +1,17 @@
 <?php
 
-namespace App;
+namespace App\Domain\Command;
 
+use App\Domain\Command\Pipeline;
 use Generator;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * CommandConfigFactory
+ * PipelineFactory
  */
-class CommandConfigFactory
+class PipelineFactory
 {
     /**
      * @var Finder
@@ -28,9 +29,9 @@ class CommandConfigFactory
     /**
      * @param string $directory
      * @param string $prefix
-     * @return Generator<CommandConfig>
+     * @return Generator<Pipeline>
      */
-    public function createCommandConfigs(string $directory, string $prefix = ""): Generator
+    public function createPipelines(string $directory, string $prefix = ""): Generator
     {
         $this->finder->name("*.yml");
         $this->finder->files()->in($directory);
@@ -54,28 +55,26 @@ class CommandConfigFactory
         });
 
         foreach ($this->finder as $file) {
-            yield $this->createCommandConfig($file, $prefix);
+            yield $this->createPipeline($file, $prefix);
         }
     }
 
     /**
      * @param SplFileInfo $fileInfo
      * @param string $prefix
-     * @return CommandConfig
+     * @return Pipeline
      */
-    public function createCommandConfig(SplFileInfo $fileInfo, string $prefix = ""): CommandConfig
+    public function createPipeline(SplFileInfo $fileInfo, string $prefix = ""): Pipeline
     {
         $path = trim($fileInfo->getRelativePath(), "/");
 
         $name = explode("/", $path);
         $name[] = $fileInfo->getFilenameWithoutExtension();
 
-        if(!empty($prefix)) {
+        if (!empty($prefix)) {
             array_unshift($name, $prefix);
         }
 
-        $name = implode(":", $name);
-
-        return new CommandConfig($name, Yaml::parseFile($fileInfo->getRealPath()));
+        return new Pipeline(implode(":", $name), Yaml::parseFile($fileInfo->getRealPath()));
     }
 }

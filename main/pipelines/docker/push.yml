@@ -1,0 +1,4 @@
+desc: Push a Docker Container
+
+scripts:
+  - docker --version

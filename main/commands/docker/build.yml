@@ -1,7 +1,0 @@
-desc: Build a Docker Container
-
-scripts:
-  - echo "Build a Docker Container"
-  - echo "Build a Docker Container"
-  - echo "Build a Docker Container"
-  - docker --version

@@ -2,7 +2,7 @@
 
 namespace App\Commands;
 
-use App\CommandConfig;
+use App\Domain\Command\Pipeline;
 use App\ProcessFactory;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -15,9 +15,9 @@ use Throwable;
 class DynamicCommand extends Command
 {
     /**
-     * @var CommandConfig
+     * @var Pipeline
      */
-    private CommandConfig $commandConfig;
+    private Pipeline $pipeline;
 
     /**
      * @var ProcessFactory
@@ -30,13 +30,13 @@ class DynamicCommand extends Command
     private OutputInterface $output;
 
     /**
-     * @param CommandConfig $commandConfig
+     * @param Pipeline $pipeline
      * @param ProcessFactory $processFactory
      * @param string|null $name
      */
-    public function __construct(CommandConfig $commandConfig, ProcessFactory $processFactory, string $name = null)
+    public function __construct(Pipeline $pipeline, ProcessFactory $processFactory, string $name = null)
     {
-        $this->commandConfig = $commandConfig;
+        $this->pipeline = $pipeline;
         $this->processFactory = $processFactory;
 
         parent::__construct($name);
@@ -47,18 +47,18 @@ class DynamicCommand extends Command
      */
     protected function configure(): void
     {
-        $this->setName($this->commandConfig->getName());
-        $this->setDescription($this->commandConfig->getDesc());
+        $this->setName($this->pipeline->getName());
+        $this->setDescription($this->pipeline->getDesc());
     }
 
     public function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->output = $output;
 
-        $this->output->writeln("<info>{$this->commandConfig->getDesc()}</info>");
+        $this->output->writeln("<info>{$this->pipeline->getDesc()}</info>");
 
         try {
-            foreach ($this->commandConfig->getScripts() as $script) {
+            foreach ($this->pipeline->getScripts() as $script) {
                 $this->onScript($script);
             }
         } catch (Throwable $e) {

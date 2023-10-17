@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Domain\Command;
 
 /**
- * CommandConfig
+ * Pipeline
  */
-class CommandConfig
+class Pipeline
 {
     /**
      * @var string

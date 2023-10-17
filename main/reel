@@ -3,7 +3,7 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-use App\CommandConfigFactory;
+use App\Domain\Command\PipelineFactory;
 use App\Commands\DynamicCommand;
 use App\ConfigurationCompiler;
 use App\ConfigurationProcessor;
@@ -23,8 +23,8 @@ $properties = $compiler->compile($configuration["properties"]);
 $app = new Application("reel", file_get_contents('/VERSION'));
 $app->add(new \App\Commands\PropertiesCommand());
 
-loadReelCommands($app);
-loadCustomCommands($app);
+loadReelPipelines($app);
+loadCustomPipelines($app);
 
 $app->run();
 
@@ -32,18 +32,18 @@ $app->run();
  * @param Application $app
  * @return void
  */
-function loadReelCommands(Application $app): void
+function loadReelPipelines(Application $app): void
 {
-    loadCommands($app, __DIR__ . "/commands");
+    loadPipelines($app, __DIR__ . "/pipelines");
 }
 
 /**
  * @param Application $app
  * @return void
  */
-function loadCustomCommands(Application $app): void
+function loadCustomPipelines(Application $app): void
 {
-    loadCommands($app, getcwd() . "/.reel/commands", "app");
+    loadPipelines($app, getcwd() . "/.reel/pipelines", "app");
 }
 
 /**
@@ -52,15 +52,15 @@ function loadCustomCommands(Application $app): void
  * @param string $prefix
  * @return void
  */
-function loadCommands(Application $app, string $directory, string $prefix = ""): void
+function loadPipelines(Application $app, string $directory, string $prefix = ""): void
 {
     $finder = new Finder();
-    $commandConfigFactory = new CommandConfigFactory($finder);
-    $commandConfigDirectory = realpath($directory);
+    $pipelineFactory = new PipelineFactory($finder);
+    $pipelineDirectory = realpath($directory);
 
-    if ($commandConfigDirectory) {
-        foreach ($commandConfigFactory->createCommandConfigs($commandConfigDirectory, $prefix) as $commandConfig) {
-            $app->add(new DynamicCommand($commandConfig, new ProcessFactory()));
+    if ($pipelineDirectory) {
+        foreach ($pipelineFactory->createPipelines($pipelineDirectory, $prefix) as $pipeline) {
+            $app->add(new DynamicCommand($pipeline, new ProcessFactory()));
         }
     }
 }
