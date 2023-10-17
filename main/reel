@@ -4,10 +4,9 @@
 require __DIR__ . '/vendor/autoload.php';
 
 use App\Domain\Command\PipelineFactory;
-use App\Commands\DynamicCommand;
+use App\Framework\Console\PipelineConsole;
 use App\ConfigurationCompiler;
 use App\ConfigurationProcessor;
-use App\ProcessFactory;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Finder\Finder;
 
@@ -60,7 +59,7 @@ function loadPipelines(Application $app, string $directory, string $prefix = "")
 
     if ($pipelineDirectory) {
         foreach ($pipelineFactory->createPipelines($pipelineDirectory, $prefix) as $pipeline) {
-            $app->add(new DynamicCommand($pipeline, new ProcessFactory()));
+            $app->add(new PipelineConsole($pipeline));
         }
     }
 }

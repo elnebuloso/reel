@@ -1,0 +1,4 @@
+desc: start docker compose stack
+
+scripts:
+  - docker-compose --file docker-compose.yml up --remove-orphans --build --detach

@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Commands;
+namespace App\Framework\Console;
 
 use App\Domain\Command\Pipeline;
-use App\ProcessFactory;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
 
 /**
- * DynamicCommand
+ * PipelineConsole
  */
-class DynamicCommand extends Command
+class PipelineConsole extends Command
 {
     /**
      * @var Pipeline
@@ -20,9 +19,9 @@ class DynamicCommand extends Command
     private Pipeline $pipeline;
 
     /**
-     * @var ProcessFactory
+     * @var InputInterface
      */
-    private ProcessFactory $processFactory;
+    private InputInterface $input;
 
     /**
      * @var OutputInterface
@@ -31,13 +30,11 @@ class DynamicCommand extends Command
 
     /**
      * @param Pipeline $pipeline
-     * @param ProcessFactory $processFactory
      * @param string|null $name
      */
-    public function __construct(Pipeline $pipeline, ProcessFactory $processFactory, string $name = null)
+    public function __construct(Pipeline $pipeline, string $name = null)
     {
         $this->pipeline = $pipeline;
-        $this->processFactory = $processFactory;
 
         parent::__construct($name);
     }
@@ -51,16 +48,18 @@ class DynamicCommand extends Command
         $this->setDescription($this->pipeline->getDesc());
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
+     */
     public function execute(InputInterface $input, OutputInterface $output): int
     {
+        $this->input = $input;
         $this->output = $output;
 
-        $this->output->writeln("<info>{$this->pipeline->getDesc()}</info>");
-
         try {
-            foreach ($this->pipeline->getScripts() as $script) {
-                $this->onScript($script);
-            }
+            $this->runPipeline();
         } catch (Throwable $e) {
             $output->writeln($e->getMessage());
 
@@ -71,14 +70,24 @@ class DynamicCommand extends Command
     }
 
     /**
+     * @return void
+     */
+    private function runPipeline(): void
+    {
+        $this->output->writeln("<fg=green>{$this->pipeline->getDesc()}</>");
+
+        foreach ($this->pipeline->getScripts() as $script) {
+            $this->runPipelineScript($script);
+        }
+    }
+
+    /**
      * @param string $script
      * @return void
      */
-    private function onScript(string $script): void
+    private function runPipelineScript(string $script): void
     {
-        $process = $this->processFactory->create(["/bin/sh", "-c", $script]);
-        $process->run(function ($type, $buffer) {
-            $this->output->write($buffer);
-        });
+        $this->output->writeln("<fg=cyan>$script</>");
+        passthru($script);
     }
 }

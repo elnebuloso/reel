@@ -1,0 +1,4 @@
+desc: stop docker compose stack
+
+scripts:
+  - docker-compose --file docker-compose.yml down --remove-orphans --volumes

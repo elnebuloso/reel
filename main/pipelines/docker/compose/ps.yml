@@ -1,0 +1,4 @@
+desc: show docker compose stack status
+
+scripts:
+  - docker-compose ps
