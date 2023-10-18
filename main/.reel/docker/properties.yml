@@ -5,8 +5,9 @@ properties:
     registry:
       hostname: ""
       namespace: ""
-    username: "{{ env('DOCKER_LOGIN_USERNAME') }}"
-    password: "{{ env('DOCKER_LOGIN_PASSWORD') }}"
+      auth:
+        username: "{{ env('DOCKER_AUTH_USERNAME') }}"
+        password: "{{ env('DOCKER_AUTH_PASSWORD') }}"
     build:
       file: Dockerfile
       context: .

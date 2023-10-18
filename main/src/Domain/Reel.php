@@ -42,6 +42,7 @@ class Reel
      */
     public function addProperty(Property $property): void {
         $this->properties[$property->getPath()] = $property;
+        ksort($this->properties);
     }
 
     /**
