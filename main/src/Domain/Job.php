@@ -9,8 +9,6 @@ use Symfony\Component\Finder\SplFileInfo;
  */
 class Job
 {
-    public const KIND = "job";
-
     public const FIELD_KIND = "kind";
 
     private const FIELD_DESC = "desc";

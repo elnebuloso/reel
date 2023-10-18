@@ -3,7 +3,9 @@
 namespace App\Domain;
 
 use App\Domain\Glue\FinderFactory;
+use App\Domain\Glue\Trait\ArrayKeyPathsToScalarValuesTrait;
 use App\Domain\Glue\YamlParserFactory;
+use Jasny\DotKey\DotKey;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**
@@ -11,6 +13,8 @@ use Symfony\Component\Finder\SplFileInfo;
  */
 class ReelFactory
 {
+    use ArrayKeyPathsToScalarValuesTrait;
+
     /**
      * @var FinderFactory
      */
@@ -47,6 +51,7 @@ class ReelFactory
     {
         $reel = new Reel();
         $reel = $this->buildJobs($reel, $config);
+        $reel = $this->buildProperties($reel, $config);
 
         return $reel;
     }
@@ -64,10 +69,46 @@ class ReelFactory
             $finder->files()->in($directory->getPath());
 
             foreach ($finder as $file) {
-                $data = $this->readDefinition($file, Job::KIND);
+                $data = $this->readDefinition($file, "job");
 
-                if (null !== $data) {
+                if(null === $data) {
+                    continue;
+                }
+
                     $reel->addJob($this->jobFactory->create($file, $data, $directory->getPrefix()));
+            }
+        }
+
+        return $reel;
+    }
+
+    /**
+     * @param Reel $reel
+     * @param Config $config
+     * @return Reel
+     */
+    private function buildProperties(Reel $reel, Config $config): Reel {
+        foreach ($config->getDirectories() as $directory) {
+            $finder = $this->finderFactory->create();
+            $finder->name("*.yml");
+            $finder->files()->in($directory->getPath());
+
+            foreach ($finder as $file) {
+                $data = $this->readDefinition($file, "properties");
+
+                if(null === $data) {
+                    continue;
+                }
+
+                if(!array_key_exists("properties", $data)) {
+                    continue;
+                }
+
+                $data = $data["properties"];
+                $paths = $this->arrayKeyPathsToScalarValues($data);
+
+                foreach ($paths as $path) {
+                    $reel->addProperty(new Property($file, $path, DotKey::on($data)->get($path)));
                 }
             }
         }
@@ -89,7 +130,7 @@ class ReelFactory
             return null;
         }
 
-        if ($data[Job::FIELD_KIND] !== $kind . "/" . Reel::VERSION) {
+        if ($data["kind"] !== $kind . "/" . Reel::VERSION) {
             return null;
         }
 

@@ -10,6 +10,11 @@ use Symfony\Component\Finder\SplFileInfo;
 class Property
 {
     /**
+     * @var SplFileInfo
+     */
+    private SplFileInfo $file;
+
+    /**
      * @var string
      */
     private string $path;
@@ -20,20 +25,23 @@ class Property
     private mixed $value;
 
     /**
-     * @var SplFileInfo
-     */
-    private SplFileInfo $fileInfo;
-
-    /**
+     * @param SplFileInfo $file
      * @param string $path
      * @param mixed $value
-     * @param SplFileInfo $fileInfo
      */
-    public function __construct(string $path, mixed $value, SplFileInfo $fileInfo)
+    public function __construct(SplFileInfo $file, string $path, mixed $value)
     {
+        $this->file = $file;
         $this->path = $path;
         $this->value = $value;
-        $this->fileInfo = $fileInfo;
+    }
+
+    /**
+     * @return SplFileInfo
+     */
+    public function getFile(): SplFileInfo
+    {
+        return $this->file;
     }
 
     /**
@@ -50,13 +58,5 @@ class Property
     public function getValue(): mixed
     {
         return $this->value;
-    }
-
-    /**
-     * @return SplFileInfo
-     */
-    public function getFileInfo(): SplFileInfo
-    {
-        return $this->fileInfo;
     }
 }

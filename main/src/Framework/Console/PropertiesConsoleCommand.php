@@ -2,7 +2,9 @@
 
 namespace App\Framework\Console;
 
+use App\Domain\Reel;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -11,17 +13,29 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class PropertiesConsoleCommand extends Command
 {
-    private const NAME = "properties";
+    /**
+     * @var Reel
+     */
+    private Reel $reel;
 
-    private const DESCRIPTION = "Show all evaluated and compiled available properties";
+    /**
+     * @param Reel $reel
+     * @param string|null $name
+     */
+    public function __construct(Reel $reel, string $name = null)
+    {
+        $this->reel = $reel;
+
+        parent::__construct($name);
+    }
 
     /**
      * @return void
      */
-    protected function configure()
+    protected function configure(): void
     {
-        $this->setName(self::NAME);
-        $this->setDescription(self::DESCRIPTION);
+        $this->setName("properties");
+        $this->setDescription("show all evaluated and compiled available properties");
     }
 
     /**
@@ -31,8 +45,23 @@ class PropertiesConsoleCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln("<info>" . self::DESCRIPTION . "</info>");
+        $this->renderProperties($output);
 
-        return Command::SUCCESS;
+        return self::SUCCESS;
+    }
+
+    private function renderProperties(OutputInterface $output): void {
+        $table = new Table($output);
+        $table->setHeaders(['path', 'value', 'file']);
+
+        foreach ($this->reel->getProperties() as $property) {
+            $table->addRow([
+                $property->getPath(),
+                $property->getValue(),
+                $property->getFile()->getPathname()
+            ]);
+        }
+
+        $table->render();
     }
 }

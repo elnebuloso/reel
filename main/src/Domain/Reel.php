@@ -15,6 +15,11 @@ class Reel
     private array $jobs = [];
 
     /**
+     * @var array<Property>
+     */
+    private array $properties = [];
+
+    /**
      * @param Job $job
      * @return void
      */
@@ -29,5 +34,21 @@ class Reel
     public function getJobs(): array
     {
         return $this->jobs;
+    }
+
+    /**
+     * @param Property $property
+     * @return void
+     */
+    public function addProperty(Property $property): void {
+        $this->properties[$property->getPath()] = $property;
+    }
+
+    /**
+     * @return array<Property>
+     */
+    public function getProperties(): array
+    {
+        return $this->properties;
     }
 }
