@@ -5,25 +5,14 @@ require __DIR__ . '/vendor/autoload.php';
 
 use App\Domain\JobFactory;
 use App\Framework\Console\JobConsoleCommand;
-use App\ConfigurationCompiler;
-use App\ConfigurationProcessor;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Finder\Finder;
 
-$processor = new ConfigurationProcessor();
-$compiler = new ConfigurationCompiler();
-
-$configuration = $processor->process([
-    __DIR__ . "/reel.yml"
-]);
-
-$properties = $compiler->compile($configuration["properties"]);
-
 $app = new Application("reel", file_get_contents('/VERSION'));
-$app->add(new \App\Framework\Console\PropertiesConsoleCommand());
+//$app->add(new \App\Framework\Console\PropertiesConsoleCommand());
 
-loadReelPipelines($app);
-loadCustomPipelines($app);
+//loadReelPipelines($app);
+//loadCustomPipelines($app);
 
 $app->run();
 

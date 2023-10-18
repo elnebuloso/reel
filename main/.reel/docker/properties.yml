@@ -2,4 +2,12 @@ kind: properties/v1
 
 properties:
   docker:
-    file: Dockerfile
+    registry:
+      hostname: ""
+      namespace: ""
+    username: "{{ env('DOCKER_LOGIN_USERNAME') }}"
+    password: "{{ env('DOCKER_LOGIN_PASSWORD') }}"
+    build:
+      file: Dockerfile
+      context: .
+    push: []
