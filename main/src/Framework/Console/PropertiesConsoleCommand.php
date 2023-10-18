@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Commands;
+namespace App\Framework\Console;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * PropertiesCommand
+ * PropertiesConsoleCommand
  */
-class PropertiesCommand extends Command
+class PropertiesConsoleCommand extends Command
 {
     private const NAME = "properties";
 

@@ -2,21 +2,21 @@
 
 namespace App\Framework\Console;
 
-use App\Domain\Command\Pipeline;
+use App\Domain\Job;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
 
 /**
- * PipelineConsole
+ * JobConsoleCommand
  */
-class PipelineConsole extends Command
+class JobConsoleCommand extends Command
 {
     /**
-     * @var Pipeline
+     * @var Job
      */
-    private Pipeline $pipeline;
+    private Job $pipeline;
 
     /**
      * @var InputInterface
@@ -29,10 +29,10 @@ class PipelineConsole extends Command
     private OutputInterface $output;
 
     /**
-     * @param Pipeline $pipeline
+     * @param Job $pipeline
      * @param string|null $name
      */
-    public function __construct(Pipeline $pipeline, string $name = null)
+    public function __construct(Job $pipeline, string $name = null)
     {
         $this->pipeline = $pipeline;
 

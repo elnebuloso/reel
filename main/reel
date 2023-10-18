@@ -3,8 +3,8 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-use App\Domain\Command\PipelineFactory;
-use App\Framework\Console\PipelineConsole;
+use App\Domain\JobFactory;
+use App\Framework\Console\JobConsoleCommand;
 use App\ConfigurationCompiler;
 use App\ConfigurationProcessor;
 use Symfony\Component\Console\Application;
@@ -20,7 +20,7 @@ $configuration = $processor->process([
 $properties = $compiler->compile($configuration["properties"]);
 
 $app = new Application("reel", file_get_contents('/VERSION'));
-$app->add(new \App\Commands\PropertiesCommand());
+$app->add(new \App\Framework\Console\PropertiesConsoleCommand());
 
 loadReelPipelines($app);
 loadCustomPipelines($app);
@@ -54,12 +54,12 @@ function loadCustomPipelines(Application $app): void
 function loadPipelines(Application $app, string $directory, string $prefix = ""): void
 {
     $finder = new Finder();
-    $pipelineFactory = new PipelineFactory($finder);
+    $pipelineFactory = new JobFactory($finder);
     $pipelineDirectory = realpath($directory);
 
     if ($pipelineDirectory) {
         foreach ($pipelineFactory->createPipelines($pipelineDirectory, $prefix) as $pipeline) {
-            $app->add(new PipelineConsole($pipeline));
+            $app->add(new JobConsoleCommand($pipeline));
         }
     }
 }

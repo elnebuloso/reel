@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Domain\Command;
+namespace App\Domain;
 
-use App\Domain\Command\Pipeline;
+use App\Domain\Job;
 use Generator;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * PipelineFactory
+ * JobFactory
  */
-class PipelineFactory
+class JobFactory
 {
     /**
      * @var Finder
@@ -29,7 +29,7 @@ class PipelineFactory
     /**
      * @param string $directory
      * @param string $prefix
-     * @return Generator<Pipeline>
+     * @return Generator<Job>
      */
     public function createPipelines(string $directory, string $prefix = ""): Generator
     {
@@ -62,9 +62,9 @@ class PipelineFactory
     /**
      * @param SplFileInfo $fileInfo
      * @param string $prefix
-     * @return Pipeline
+     * @return Job
      */
-    public function createPipeline(SplFileInfo $fileInfo, string $prefix = ""): Pipeline
+    public function createPipeline(SplFileInfo $fileInfo, string $prefix = ""): Job
     {
         $path = trim($fileInfo->getRelativePath(), "/");
 
@@ -75,6 +75,6 @@ class PipelineFactory
             array_unshift($name, $prefix);
         }
 
-        return new Pipeline(implode(":", $name), Yaml::parseFile($fileInfo->getRealPath()));
+        return new Job(implode(":", $name), Yaml::parseFile($fileInfo->getRealPath()));
     }
 }

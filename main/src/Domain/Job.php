@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Domain\Command;
+namespace App\Domain;
 
 /**
- * Pipeline
+ * Job
  */
-class Pipeline
+class Job
 {
     /**
      * @var string
