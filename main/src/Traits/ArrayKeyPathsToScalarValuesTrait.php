@@ -13,7 +13,7 @@ trait ArrayKeyPathsToScalarValuesTrait
      * @param array $paths
      * @return array
      */
-    public function arrayKeyPathsToScalarValues(array $array, array $parentKeys = [], array &$paths = []): array
+    protected function arrayKeyPathsToScalarValues(array $array, array $parentKeys = [], array &$paths = []): array
     {
         foreach ($array as $key => $value) {
             $parentKeys[] = $key;

@@ -2,7 +2,7 @@
 
 namespace AppTests;
 
-use App\Reel;
+use App\Domain\Reel;
 use PHPUnit\Framework\TestCase;
 
 /**
