@@ -1,6 +1,6 @@
 <?php
 
-namespace AppTests\Traits;
+namespace AppTests\Domain\Glue\Trait;
 
 use App\Domain\Glue\Trait\ArrayFilterAllowListTrait;
 use PHPUnit\Framework\TestCase;
