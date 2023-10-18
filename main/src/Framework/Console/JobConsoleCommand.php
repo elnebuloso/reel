@@ -16,7 +16,7 @@ class JobConsoleCommand extends Command
     /**
      * @var Job
      */
-    private Job $pipeline;
+    private Job $job;
 
     /**
      * @var InputInterface
@@ -29,12 +29,12 @@ class JobConsoleCommand extends Command
     private OutputInterface $output;
 
     /**
-     * @param Job $pipeline
+     * @param Job $job
      * @param string|null $name
      */
-    public function __construct(Job $pipeline, string $name = null)
+    public function __construct(Job $job, string $name = null)
     {
-        $this->pipeline = $pipeline;
+        $this->job = $job;
 
         parent::__construct($name);
     }
@@ -44,8 +44,8 @@ class JobConsoleCommand extends Command
      */
     protected function configure(): void
     {
-        $this->setName($this->pipeline->getName());
-        $this->setDescription($this->pipeline->getDesc());
+        $this->setName($this->job->getName());
+        $this->setDescription($this->job->getDesc());
     }
 
     /**
@@ -74,9 +74,9 @@ class JobConsoleCommand extends Command
      */
     private function runPipeline(): void
     {
-        $this->output->writeln("<fg=green>{$this->pipeline->getDesc()}</>");
+        $this->output->writeln("<fg=green>{$this->job->getDesc()}</>");
 
-        foreach ($this->pipeline->getScripts() as $script) {
+        foreach ($this->job->getScripts() as $script) {
             $this->runPipelineScript($script);
         }
     }

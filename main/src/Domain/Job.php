@@ -2,11 +2,26 @@
 
 namespace App\Domain;
 
+use Symfony\Component\Finder\SplFileInfo;
+
 /**
  * Job
  */
 class Job
 {
+    public const KIND = "job";
+
+    public const FIELD_KIND = "kind";
+
+    private const FIELD_DESC = "desc";
+
+    private const FIELD_SCRIPTS = "scripts";
+
+    /**
+     * @var SplFileInfo
+     */
+    private SplFileInfo $file;
+
     /**
      * @var string
      */
@@ -18,13 +33,23 @@ class Job
     private array $data;
 
     /**
+     * @param SplFileInfo $file
      * @param string $name
      * @param array $data
      */
-    public function __construct(string $name, array $data)
+    public function __construct(SplFileInfo $file, string $name, array $data)
     {
+        $this->file = $file;
         $this->name = $name;
         $this->data = $data;
+    }
+
+    /**
+     * @return SplFileInfo
+     */
+    public function getFile(): SplFileInfo
+    {
+        return $this->file;
     }
 
     /**
@@ -38,9 +63,17 @@ class Job
     /**
      * @return string
      */
+    public function getKind(): string
+    {
+        return $this->data[self::FIELD_KIND];
+    }
+
+    /**
+     * @return string
+     */
     public function getDesc(): string
     {
-        return $this->data["desc"];
+        return $this->data[self::FIELD_DESC];
     }
 
     /**
@@ -48,6 +81,6 @@ class Job
      */
     public function getScripts(): array
     {
-        return $this->data["scripts"];
+        return $this->data[self::FIELD_SCRIPTS];
     }
 }

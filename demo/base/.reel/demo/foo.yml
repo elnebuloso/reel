@@ -1,3 +1,4 @@
+kind: job/v1
 desc: foo
 
 scripts:
