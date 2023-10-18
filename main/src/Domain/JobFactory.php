@@ -3,7 +3,6 @@
 namespace App\Domain;
 
 use Symfony\Component\Finder\SplFileInfo;
-use Symfony\Component\Yaml\Yaml;
 
 /**
  * JobFactory
