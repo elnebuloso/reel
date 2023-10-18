@@ -2,7 +2,7 @@
 
 namespace AppTests\Traits;
 
-use App\Traits\StringOrNullTrait;
+use App\Domain\Glue\Trait\StringOrNullTrait;
 use PHPUnit\Framework\TestCase;
 
 /**

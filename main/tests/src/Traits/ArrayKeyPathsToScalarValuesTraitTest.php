@@ -2,7 +2,7 @@
 
 namespace AppTests\Traits;
 
-use App\Traits\ArrayKeyPathsToScalarValuesTrait;
+use App\Domain\Glue\Trait\ArrayKeyPathsToScalarValuesTrait;
 use PHPUnit\Framework\TestCase;
 
 /**

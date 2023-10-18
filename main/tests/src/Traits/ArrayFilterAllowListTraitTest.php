@@ -2,7 +2,7 @@
 
 namespace AppTests\Traits;
 
-use App\Traits\ArrayFilterAllowListTrait;
+use App\Domain\Glue\Trait\ArrayFilterAllowListTrait;
 use PHPUnit\Framework\TestCase;
 
 /**

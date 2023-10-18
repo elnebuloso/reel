@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace App\Domain\Glue\Trait;
 
 /**
  * ArrayFilterRecursiveTrait

@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Traits\ArrayKeyPathsToScalarValuesTrait;
+use App\Domain\Glue\Trait\ArrayKeyPathsToScalarValuesTrait;
 use App\Twig\PropertiesTwigExtension;
 use Jasny\DotKey\DotKey;
 use Twig\Environment as TwigEnvironment;

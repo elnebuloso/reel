@@ -2,7 +2,7 @@
 
 namespace AppTests\Traits;
 
-use App\Traits\ArrayFilterBlockListTrait;
+use App\Domain\Glue\Trait\ArrayFilterBlockListTrait;
 use PHPUnit\Framework\TestCase;
 
 /**

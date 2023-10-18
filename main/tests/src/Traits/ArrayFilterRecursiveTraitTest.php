@@ -2,7 +2,7 @@
 
 namespace AppTests\Traits;
 
-use App\Traits\ArrayFilterRecursiveTrait;
+use App\Domain\Glue\Trait\ArrayFilterRecursiveTrait;
 use PHPUnit\Framework\TestCase;
 
 /**
