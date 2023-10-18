@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Domain\Glue\Trait\ArrayKeyPathsToScalarValuesTrait;
-use App\Twig\PropertiesTwigExtension;
+use App\Domain\Twig\PropertiesTwigExtension;
 use Jasny\DotKey\DotKey;
 use Twig\Environment as TwigEnvironment;
 use Twig\Error\LoaderError as TwigLoaderError;

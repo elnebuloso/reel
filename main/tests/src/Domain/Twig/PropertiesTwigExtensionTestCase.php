@@ -1,8 +1,8 @@
 <?php
 
-namespace AppTests\Twig;
+namespace AppTests\Domain\Twig;
 
-use App\Twig\PropertiesTwigExtension;
+use App\Domain\Twig\PropertiesTwigExtension;
 use PHPUnit\Framework\TestCase;
 
 /**
