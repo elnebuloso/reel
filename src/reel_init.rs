@@ -1,4 +1,4 @@
-use clap::{Arg, Command};
+use clap::Command;
 use serde::{Deserialize, Serialize};
 use serde_yaml;
 use std::fs::File;
@@ -8,29 +8,28 @@ use walkdir::WalkDir;
 
 #[derive(Debug, Serialize, Deserialize)]
 struct ReelFile {
+    name: String,
     filename: String,
     config: ReelConfig,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 struct ReelConfig {
-    // Definiere hier die Felder entsprechend deinem YAML-Schema.
+    kind: String
 }
 
 pub fn fetch_subcommands() -> Result<Vec<Command>, Box<dyn std::error::Error>> {
     let base_path = "./.reel";
     let reel_files = read_yaml_files(base_path)?;
+    let mut subcommands = Vec::new();
 
     for file in reel_files {
-        println!("{:?}", file);
+        if file.config.kind == "job/v1" {
+            subcommands.push(Command::new(file.name));
+        }
     }
 
-    let commands = vec![
-        Command::new("subcommand1").about("Tut etwas Spezifisches mit subcommand1"),
-        Command::new("subcommand2").about("Tut etwas Spezifisches mit subcommand2"),
-    ];
-
-    Ok(commands)
+    Ok(subcommands)
 }
 
 fn read_yaml_files(base_path: &str) -> Result<Vec<ReelFile>, Box<dyn std::error::Error>> {
@@ -54,8 +53,16 @@ fn read_yaml_files(base_path: &str) -> Result<Vec<ReelFile>, Box<dyn std::error:
         // Parse the file's content into ReelConfig
         let config: ReelConfig = serde_yaml::from_str(&contents)?;
 
+        // Generate the name by replacing slashes with colons and removing the file extension
+        let name = relative_path
+            .rsplitn(2, '.') // Split from the end into 2 parts at the first dot found
+            .last() // Take the first part (ignoring the file extension)
+            .unwrap()
+            .replace("/", ":"); // Replace slashes with colons
+
         // Create a ReelFile object and add it to the vector
         reel_files.push(ReelFile {
+            name,
             filename: relative_path.to_string(),
             config,
         });
