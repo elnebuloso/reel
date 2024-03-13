@@ -1,6 +1,0 @@
-kind: command/v1
-desc: This is the project/bundle command
-
-scripts:
-  - echo "do something1"
-  - echo "do something2"
