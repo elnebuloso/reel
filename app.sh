@@ -5,6 +5,7 @@ _DEV_IMAGE_="reel-dev"
 _ARGS_BUILD_=()
 _ARGS_BUILD_+=("--rm")
 _ARGS_BUILD_+=("--pull")
+_ARGS_BUILD_+=("--no-cache")
 _ARGS_BUILD_+=("--target prod")
 _ARGS_BUILD_+=("--file Dockerfile")
 
