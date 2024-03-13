@@ -44,25 +44,20 @@ fn read_yaml_files(base_path: &str) -> Result<Vec<ReelFile>, Box<dyn std::error:
         .filter(|e| e.path().extension().map_or(false, |ext| ext == "yaml" || ext == "yml"))
     {
         let path = entry.path();
-
-        // Determine the file's relative path from the base path
         let relative_path = path.strip_prefix(base_path_obj)?.to_str().unwrap();
 
         let mut file = File::open(path)?;
         let mut contents = String::new();
         file.read_to_string(&mut contents)?;
 
-        // Parse the file's content into ReelConfig
         let config: ReelConfig = serde_yaml::from_str(&contents)?;
-
-        // Generate the name by replacing slashes with colons and removing the file extension
+        
         let name = relative_path
-            .rsplitn(2, '.') // Split from the end into 2 parts at the first dot found
-            .last() // Take the first part (ignoring the file extension)
+            .rsplitn(2, '.') 
+            .last() 
             .unwrap()
-            .replace("/", ":"); // Replace slashes with colons
+            .replace("/", ":");
 
-        // Create a ReelFile object and add it to the vector
         reel_files.push(ReelFile {
             name,
             filename: relative_path.to_string(),
