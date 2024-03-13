@@ -1,0 +1,9 @@
+kind: properties/v1
+
+properties:
+  image:
+    build:
+      args: --rm --pull --no-cache
+      file: Dockerfile
+      target: prod
+      context: .

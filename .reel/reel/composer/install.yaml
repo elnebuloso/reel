@@ -1,0 +1,6 @@
+kind: command/v1
+desc: Runs Composer Install
+
+scripts:
+  - docker image build --rm --pull --no-cache --target dev-composer --file Dockerfile --tag php_composer_tmp .
+  - docker run php_composer_tmp composer install

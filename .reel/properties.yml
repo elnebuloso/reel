@@ -1,5 +1,0 @@
-kind: properties/v1
-
-properties:
-  project:
-    name: "reel/demo/base"

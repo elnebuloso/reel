@@ -52,7 +52,7 @@ fn read_yaml_files(base_path: &str) -> Result<Vec<ReelFile>, Box<dyn std::error:
 
         let config: ReelConfig = serde_yaml::from_str(&contents)?;
 
-        let name = relative_path.rsplitn(2, '.').last().unwrap().replace("/", ":");
+        let name = relative_path.rsplitn(2, '.').last().unwrap().replace("/", "_");
 
         reel_files.push(ReelFile {
             name,
