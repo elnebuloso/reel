@@ -10,6 +10,9 @@ clap = { version = "4.5.2", features = ["derive", "string"] }
 env_logger = "0.11.3"
 log = "0.4.21"
 derive_builder = "0.20.0"
+serde = { version = "1.0.197", features = ["derive"] }
+serde_yaml = "0.9.32"
+walkdir = "2.5.0"
 
 [profile.release]
 strip = true

@@ -12,7 +12,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .subcommand_required(true)
         .arg_required_else_help(true)
         .subcommands(reel_init::fetch_subcommands()?);
-    
+
     let _matches = command.get_matches();
 
     // match matches.subcommand() {
