@@ -1,5 +1,5 @@
 kind: command/v1
-desc: This is the demo/foo command
+desc: This is the demo/bar command
 
 scripts:
   - echo "do something1"

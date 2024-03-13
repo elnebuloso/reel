@@ -1,35 +1,37 @@
-use clap::Command;
 use serde::{Deserialize, Serialize};
 use serde_yaml;
+use std::collections::HashMap;
 use std::fs::File;
 use std::io::Read;
 use std::path::Path;
 use walkdir::WalkDir;
 
 #[derive(Debug, Serialize, Deserialize)]
-struct ReelFile {
-    name: String,
-    filename: String,
-    config: ReelConfig,
+pub struct ReelFile {
+    pub name: String,
+    pub filename: String,
+    pub config: ReelConfig,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-struct ReelConfig {
-    kind: String
+pub struct ReelConfig {
+    pub kind: String,
+    pub desc: Option<String>,
+    pub scripts: Option<Vec<String>>,
 }
 
-pub fn fetch_subcommands() -> Result<Vec<Command>, Box<dyn std::error::Error>> {
+pub fn fetch_subcommands() -> Result<HashMap<String, ReelFile>, Box<dyn std::error::Error>> {
     let base_path = "./.reel";
     let reel_files = read_yaml_files(base_path)?;
-    let mut subcommands = Vec::new();
+    let mut subcommands_map = HashMap::new();
 
     for file in reel_files {
-        if file.config.kind == "job/v1" {
-            subcommands.push(Command::new(file.name));
+        if file.config.kind == "command/v1" {
+            subcommands_map.insert(file.name.clone(), file);
         }
     }
 
-    Ok(subcommands)
+    Ok(subcommands_map)
 }
 
 fn read_yaml_files(base_path: &str) -> Result<Vec<ReelFile>, Box<dyn std::error::Error>> {
