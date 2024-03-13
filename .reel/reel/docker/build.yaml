@@ -1,0 +1,5 @@
+kind: command/v1
+desc: Builds a Docker image, ensuring a clean build by disabling cache usage and always pulling the latest images.
+
+scripts:
+  - docker image build --rm --pull --no-cache --target prod --file Dockerfile .

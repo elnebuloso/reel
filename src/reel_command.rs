@@ -1,18 +1,28 @@
 use crate::reel_init::ReelFile;
-use std::process::Command;
+use std::process::{Command, Stdio};
 
 pub fn execute(reel_file: &ReelFile) -> Result<(), Box<dyn std::error::Error>> {
     if let Some(scripts) = &reel_file.config.scripts {
         for script in scripts {
             log::debug!("Command: {}, Script: {}", reel_file.name, script);
 
-            let output = Command::new("bash").arg("-c").arg(script).output()?;
+            let mut child = Command::new("bash")
+                .arg("-c")
+                .arg(script)
+                .stdin(Stdio::inherit())
+                .stdout(Stdio::inherit())
+                .stderr(Stdio::inherit())
+                .spawn()?;
 
-            if !output.status.success() {
-                return Err(format!("{}", String::from_utf8_lossy(&output.stderr)).into());
+            let status = child.wait()?;
+
+            if !status.success() {
+                return Err(format!(
+                    "Script execution failed. Command: '{}', Script: '{}'",
+                    reel_file.name, script
+                )
+                .into());
             }
-
-            println!("{}", String::from_utf8_lossy(&output.stdout));
         }
     }
 
