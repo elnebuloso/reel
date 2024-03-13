@@ -1,6 +1,0 @@
-kind: job/v1
-desc: build a docker image
-
-scripts:
-  - docker --version
-  - docker-compose --version

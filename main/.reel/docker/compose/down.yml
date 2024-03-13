@@ -1,9 +1,0 @@
-kind: job/v1
-desc: stop docker compose stack
-
-options:
-  - file: docker-compose.yml
-  - args: --remove-orphans --volumes
-
-scripts:
-  - docker-compose --file docker-compose.yml down --remove-orphans --volumes

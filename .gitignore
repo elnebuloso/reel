@@ -1,8 +1,2 @@
 /.idea
-/.reel
-/.reel.env.local
-
-/main/tests/.phpunit.result.cache
-/main/vendor
-
-/phpunit-9.phar
+/.vscode

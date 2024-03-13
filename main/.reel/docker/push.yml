@@ -1,5 +1,0 @@
-kind: job/v1
-desc: push a docker image into a registry
-
-scripts:
-  - docker --version

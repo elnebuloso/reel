@@ -1,7 +1,0 @@
-kind: properties/v1
-
-properties:
-  project:
-    root: "{{ current_dir() }}"
-    name: "{{ project.root|basename }}"
-    slug: "{{ project.name|slugify }}"
