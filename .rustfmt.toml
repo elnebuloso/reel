@@ -1,0 +1,15 @@
+reorder_imports = true
+reorder_modules = true
+max_width = 120
+newline_style = "Unix"
+fn_params_layout = "Vertical"
+single_line_if_else_max_width = 0
+single_line_let_else_max_width = 0
+struct_lit_width = 0
+struct_variant_width = 0
+
+# unstable_features = true
+# empty_item_single_line = false
+# struct_lit_single_line = false
+# brace_style = "AlwaysNextLine"
+# control_brace_style = "ClosingNextLine"
