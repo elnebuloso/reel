@@ -3,4 +3,6 @@ desc: This is the demo/bar command
 
 scripts:
   - echo "do something1"
+  - ls -la
   - echo "do something2"
+  - docker ps

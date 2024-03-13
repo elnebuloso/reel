@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 use serde_yaml;
-use std::collections::HashMap;
+use std::collections::BTreeMap;
 use std::fs::File;
 use std::io::Read;
 use std::path::Path;
@@ -20,10 +20,10 @@ pub struct ReelConfig {
     pub scripts: Option<Vec<String>>,
 }
 
-pub fn fetch_subcommands() -> Result<HashMap<String, ReelFile>, Box<dyn std::error::Error>> {
+pub fn fetch_subcommands() -> Result<BTreeMap<String, ReelFile>, Box<dyn std::error::Error>> {
     let base_path = "./.reel";
     let reel_files = read_yaml_files(base_path)?;
-    let mut subcommands_map = HashMap::new();
+    let mut subcommands_map = BTreeMap::new();
 
     for file in reel_files {
         if file.config.kind == "command/v1" {
@@ -51,12 +51,8 @@ fn read_yaml_files(base_path: &str) -> Result<Vec<ReelFile>, Box<dyn std::error:
         file.read_to_string(&mut contents)?;
 
         let config: ReelConfig = serde_yaml::from_str(&contents)?;
-        
-        let name = relative_path
-            .rsplitn(2, '.') 
-            .last() 
-            .unwrap()
-            .replace("/", ":");
+
+        let name = relative_path.rsplitn(2, '.').last().unwrap().replace("/", ":");
 
         reel_files.push(ReelFile {
             name,
