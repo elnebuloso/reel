@@ -24,7 +24,7 @@ pub fn fetch_subcommands() -> Result<Vec<Command>, Box<dyn std::error::Error>> {
     for file in reel_files {
         println!("{:?}", file);
     }
-    
+
     let commands = vec![
         Command::new("subcommand1").about("Tut etwas Spezifisches mit subcommand1"),
         Command::new("subcommand2").about("Tut etwas Spezifisches mit subcommand2"),
@@ -35,7 +35,7 @@ pub fn fetch_subcommands() -> Result<Vec<Command>, Box<dyn std::error::Error>> {
 
 fn read_yaml_files(base_path: &str) -> Result<Vec<ReelFile>, Box<dyn std::error::Error>> {
     let base_path_obj = Path::new(base_path);
-    let mut files = Vec::new();
+    let mut reel_files = Vec::new();
 
     for entry in WalkDir::new(base_path)
         .into_iter()
@@ -44,22 +44,22 @@ fn read_yaml_files(base_path: &str) -> Result<Vec<ReelFile>, Box<dyn std::error:
     {
         let path = entry.path();
 
-        // Ermittle den relativen Pfad der Datei vom Basispfad
+        // Determine the file's relative path from the base path
         let relative_path = path.strip_prefix(base_path_obj)?.to_str().unwrap();
 
         let mut file = File::open(path)?;
         let mut contents = String::new();
         file.read_to_string(&mut contents)?;
 
-        // Parse den Inhalt der Datei zu ReelConfig
+        // Parse the file's content into ReelConfig
         let config: ReelConfig = serde_yaml::from_str(&contents)?;
 
-        // Erstelle ein ReelFile-Objekt und füge es zum Vector hinzu
-        files.push(ReelFile {
+        // Create a ReelFile object and add it to the vector
+        reel_files.push(ReelFile {
             filename: relative_path.to_string(),
             config,
         });
     }
 
-    Ok(files)
+    Ok(reel_files)
 }
